@@ -1,0 +1,7 @@
+ITEM NO.	PART NUMBER	DESCRIPTION	QTY.
+1	MediumArm		2
+2	ShortArm		2
+3	LongArm			2
+4	DistalArm		2
+5	PivotPlate		4
+6	StructuralPlate		6
