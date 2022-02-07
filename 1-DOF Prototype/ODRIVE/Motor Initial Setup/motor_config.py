@@ -9,20 +9,21 @@ def configure_motor_settings(m):
     :param m: ODRIVE Motor (odrv0)
     :return: Configured motors according to Maxon Motor
     """
+    """
     # Current Limit:
-    # m1.axis1.motor.config.current_lim = 10
-
+    m.axis1.motor.config.current_lim = 9.28
+    
     # Velocity Limit:
-    # m1.axis1.controller.config.vel_limit = 0.001
+    m.axis1.controller.config.vel_limit = 0.001
 
     # Calibration current
-    # m1.axis1.motor.config.calibration_current = 10
+    m.axis1.motor.config.calibration_current = 10
 
     # Brake Resistance:
     m.config.enable_brake_resistor = False
 
     # Max Negative Current:
-    m.config.dc_max_negative_current = 0.01
+    m.config.dc_max_negative_current = -0.04
 
     # Pole Pairs in motor
     m.axis1.motor.config.pole_pairs = 7
@@ -35,7 +36,7 @@ def configure_motor_settings(m):
     m.axis1.encoder.config.cpr = 8192
 
     m.config_brake_resistance = 0.5
-
+    """
     m.save_configuration()
 
 
