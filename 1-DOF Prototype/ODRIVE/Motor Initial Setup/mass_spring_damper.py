@@ -13,7 +13,7 @@ def main():
     m1.controller.config.control_mode = CONTROL_MODE_TORQUE_CONTROL
     m1.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
 
-    wall = 0.5
+    wall = 0.6
     kp = 10
     kv = 0.05
 
