@@ -25,6 +25,7 @@ def main():
         p = m1.encoder.pos_estimate
         v = m1.encoder.vel_estimate
         if p >= wall:
+            hit_wall = True
             print(p)
             torque = -1 * kp * (p - wall) + -1 * kv * v
             if t < impulse_time:
