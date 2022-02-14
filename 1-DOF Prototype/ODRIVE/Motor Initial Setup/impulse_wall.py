@@ -15,7 +15,7 @@ def main():
     wall = 0.6
     kp = 10
     kv = 0.05
-    mass = 1
+    mass = 0.1
     dt = 0.01
     t = 0
     hit_wall = False
