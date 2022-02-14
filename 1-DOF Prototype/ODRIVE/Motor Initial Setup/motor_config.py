@@ -9,20 +9,21 @@ def configure_motor_settings(m):
     :param m: ODRIVE Motor (odrv0)
     :return: Configured motors according to Maxon Motor
     """
+    """
     # Current Limit:
-    # m1.axis1.motor.config.current_lim = 10
-
+    m.axis1.motor.config.current_lim = 9.28
+    
     # Velocity Limit:
-    # m1.axis1.controller.config.vel_limit = 0.001
+    m.axis1.controller.config.vel_limit = 0.001
 
     # Calibration current
-    # m1.axis1.motor.config.calibration_current = 10
+    m.axis1.motor.config.calibration_current = 10
 
     # Brake Resistance:
     m.config.enable_brake_resistor = False
 
     # Max Negative Current:
-    m.config.dc_max_negative_current = 0.01
+    m.config.dc_max_negative_current = -0.04
 
     # Pole Pairs in motor
     m.axis1.motor.config.pole_pairs = 7
@@ -35,19 +36,29 @@ def configure_motor_settings(m):
     m.axis1.encoder.config.cpr = 8192
 
     m.config_brake_resistance = 0.5
-
+    """
     m.save_configuration()
 
 
-def configure_motor(m1):
-    m = m1.axis1
+def calibrate_motor(m):
     m.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
-    time.sleep(18)
-    m.encoder.config.use_index = True
-    m.requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION
-    m.config.startup_encoder_index_search = True
+    print("Starting Full Motor Calibration")
+    time.sleep(20)
     m.motor.config.pre_calibrated = True
+    print("Motor Calibrated")
+
+
+def calibrate_encoder(m):
+    print("Starting Encoder Calibration")
+    m.encoder.config.use_index = True
+    m.requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH
+    time.sleep(5)
+    m.requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION
+    time.sleep(10)
+    m.config.startup_encoder_index_search = True
     m.encoder.config.pre_calibrated = True
+    m.motor.config.pre_calibrated = True
+    print("Encoder Calibrated")
 
 
 def main():
@@ -66,7 +77,16 @@ def main():
     elif configure == "N":
         print("Motor will not be configured...")
 
-    configure_motor(m1)
+    while True:
+        c = input("Do you want to calibrate the motor? (Y/N) \n")
+        if c == "Y" or c == "N":
+            break
+    if c == "Y":
+        print("Motor will be calibrated...")
+        calibrate_motor(m1)
+        calibrate_encoder(m1)
+    elif c == "N":
+        print("Motor will not be calibrated...")
 
 
 main()

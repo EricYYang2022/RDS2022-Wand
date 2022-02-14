@@ -13,22 +13,19 @@ def main():
     m1.controller.config.control_mode = CONTROL_MODE_TORQUE_CONTROL
     m1.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
 
+    wall = 0.6
+    kp = 10
+    kv = 0.05
+
     while True:
-        pos = m1.encoder.pos_estimate
-        if pos >= 0.5:
-            print(pos)
-            if pos >= 0.6:
-                m1.controller.input_torque = -0.2
-            else:
-                m1.controller.input_torque = -0.15
-        else:
-            m1.controller.input_torque = 0.0
-        if pos <= -0.5:
-            print(pos)
-            if pos <= 0.6:
-                m1.controller.input_torque = 0.2
-            else:
-                m1.controller.input_torque = 0.15
+        p = m1.encoder.pos_estimate
+        v = m1.encoder.vel_estimate
+        if p >= wall:
+            print(p)
+            m1.controller.input_torque = -1 * kp * (p - wall) + -1 * kv * v
+        elif p <= -1 * wall:
+            print(p)
+            m1.controller.input_torque = kp * (p - (-1 * wall)) + kv * v
         else:
             m1.controller.input_torque = 0.0
 
