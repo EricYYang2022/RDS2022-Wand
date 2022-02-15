@@ -2,7 +2,9 @@ import serial
 
 
 def main():
-    ser = serial.Serial("/dev/ttyACM0", baudrate=115200)
-    print(ser.name)
+    o = serial.Serial("/dev/ttyACM0", baudrate=115200)
+    print(o.name)
+    o.write(b't 1 1')
+
 
 
