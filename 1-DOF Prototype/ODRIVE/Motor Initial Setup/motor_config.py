@@ -61,6 +61,15 @@ def calibrate_encoder(m):
     print("Encoder Calibrated")
 
 
+def Odrive_UART_setup(m):
+    m.config.enable_uart_a = True
+    m.config.gpio1_mode = GPIO_MODE_DIGITAL
+    m.config.gpio2_mode = GPIO_MODE_DIGITAL
+    m.config.uart_a_baudrate = 115200
+    m.config.uart0_protocol = STREAM_PROTOCOL_TYPE_ASCII_AND_STDOUT
+    m.reboot()
+
+
 def main():
     print("Finding an ODRIVE...")
     m1 = o.find_any()
@@ -87,6 +96,16 @@ def main():
         calibrate_encoder(m1)
     elif c == "N":
         print("Motor will not be calibrated...")
+
+    while True:
+        c = input("Do you want to enable UART? (Y/N) \n")
+        if c == "Y" or c == "N":
+            break
+    if c == "Y":
+        print("UART will be setup")
+        Odrive_UART_setup(m1)
+    elif c == "N":
+        print("UART will not be setup")
 
 
 main()
