@@ -9,8 +9,8 @@ tau2 = [-1, 1, -1, 1]*0.536;
 %defined to be the angle of the first limb relative to a horizontal line,
 %and more or less pi/20, 19pi/20 for theta2, the angle of the second limb
 %relative to the first limb.
-theta1_space = linspace(0, pi/2, NX);
-theta2_space = linspace(pi/20, 19*pi/20, NY);
+theta1_space = linspace(-pi/2, 0, NX);
+theta2_space = linspace(-pi/2,pi, NY);
 syms t1 t2
 %initial design a = 0.1 b = 0.5
 a = 0.1;
@@ -20,9 +20,14 @@ b = 0.5;
 % Y = b*(sin(t1)+cos(t1+t2-pi/2));
 
 %using Alex's X and Y coords for the e-e given a phantom arm configuration
-X = b*cos(t1)+b*cos(t1+pi-t2);
-Y = b*sin(t1)+b*sin(t1+pi-t2);
+% X = b*cos(t1)+b*cos(t1+pi-t2);
+% Y = b*sin(t1)+b*sin(t1+pi-t2);
 
+%Using X and Y coords for the e-e with angles that are independent of one
+%another
+
+X = b*cos(t1)+b*cos(180+t2);
+Y = b*sin(t1)+b*sin(180+t2);
 %Do jacobian, convert to matlabFunction because symbolic math is very very
 %slow
 J = [diff(X, t1), diff(X, t2); diff(Y, t1), diff(Y, t2)];
@@ -50,7 +55,7 @@ for i = 1:4
             t1 = theta1_space(k);
             t2 = theta2_space(l);
 
-            J_curr = [J11(t1, t2), J12(t1, t2); J21(t1, t2), J22(t1, t2)]';
+            J_curr = [J11(t1), J12(t2); J21(t1), J22(t2)]';
             %Multiply by 10 because of a 10:1 transmission? I'm still using
             %a pseudoinverse here because apparently we got a lot of
             %singular matrices when we do inv()
@@ -71,6 +76,18 @@ for i = 1:4
         end
     end
     %plotting stuff
+    for k = 1:NX
+        for l = 1:NY
+            if (theta2_space(l) < theta1_space(k) || theta2_space(l) > pi + theta1_space(k))
+                F_tablex(k, l) = nan;
+                F_tabley(k, l) = nan;
+                F_table(k, l) = nan;
+            end
+        end
+    end
+    
+
+
     [X, Y] = meshgrid(theta1_space, theta2_space);
     figure; hold on;
     subplot(3, 1, 1);
@@ -108,6 +125,19 @@ for i = 1:4
     h = rotate3d;
     h.RotateStyle = 'box';
     h.Enable = 'on';
+
+    figure;
+    surf(X, Y, F_table)
+    colorbar;
+    shading("interp");
+    graph_name = sprintf("Max Force when tau1 = %.3f, tau2 = %.3f", tau(1), tau(2));
+    title(graph_name, "Interpreter", "latex");
+    xlabel("\theta_1")
+    ylabel("\theta_2")
+    h = rotate3d;
+    h.RotateStyle = 'box';
+    h.Enable = 'on';
+    view(0, 90)
 
     fprintf("Finished %d/4 progress\n", progress);
     progress = progress + 1;
