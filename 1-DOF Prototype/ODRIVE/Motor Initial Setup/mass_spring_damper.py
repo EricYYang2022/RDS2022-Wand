@@ -20,6 +20,7 @@ def main():
     while True:
         p = m1.encoder.pos_estimate
         v = m1.encoder.vel_estimate
+        print(p)
         if p >= wall:
             print(p)
             m1.controller.input_torque = -1 * kp * (p - wall) + -1 * kv * v
