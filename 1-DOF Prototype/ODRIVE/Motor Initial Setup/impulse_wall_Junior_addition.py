@@ -68,6 +68,7 @@ def main():
             if hit_wall:
                 t = 0
                 hit_wall = False
+        p_prev=p
         current_time += 1
         elapsed_time = time.time()-start_time
         print(elapsed_time/elapsed_time)
