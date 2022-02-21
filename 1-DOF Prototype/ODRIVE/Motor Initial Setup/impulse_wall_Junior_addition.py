@@ -48,7 +48,7 @@ def main():
             if not hit_wall:
                 hit_wall = True
                 const_v = v + 0.0
-            if v<v_min or abs(p-p_prev)<p_min_change
+            if abs(v)<v_min or abs(p-p_prev)<p_min_change
                 torque=torque_prev
             else:
                 torqueSMD = -1 * kp * (p - wall) + -1 * kv * v
