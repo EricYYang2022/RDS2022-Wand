@@ -45,7 +45,7 @@ def main():
 
             if impulse_enabled:
                 # Send impulse force if impulse false is positive
-                if t < impulse_time:
+                if t < impulse_time and v > 0.0:
                     torque += -1 * (m * const_v / dt)
                 else:
                     impulse_enabled = False
@@ -58,7 +58,7 @@ def main():
             if p < wall - 0.08:
                 # Resets impulse a certain away from the wall
                 impulse_wall = False
-
+        print("Torque: %f" % torque)
         m1.controller.input_torque = torque
 
 
