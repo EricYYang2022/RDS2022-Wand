@@ -34,16 +34,19 @@ def main():
         p = m1.encoder.pos_estimate
         v = m1.encoder.vel_estimate
         print("pos: %f, vel: %f" % (p, v))
-        torque = 0.0
         if p >= wall:
+            # If within wall send the spring mass damper send spring mass torque
             torque = -1 * kp * (p - wall) + -1 * kv * v
+
             if not impulse_wall:
+                # Turn on Impulse force if needed and set vel constant
                 impulse_wall = True
                 impulse_start = True
                 const_v = v + 0.0
                 impulse_time = const_v / 8
 
             if impulse_start:
+                # Send impulse force if impulse false is positive
                 if t < impulse_time:
                     t += dt
                     if v > 0.001:
@@ -51,10 +54,12 @@ def main():
                 else:
                     impulse_start = False
         else:
+            # Resets impulse start when outside the wall
             impulse_start = False
             t = 0
             torque = 0.0
             if p < wall - 0.05:
+                # Resets impulse a certain away from the wall
                 impulse_wall = False
 
         m1.controller.input_torque = torque
