@@ -46,8 +46,7 @@ def main():
                 # Send impulse force if impulse false is positive
                 if t < impulse_time:
                     t += dt
-                    if v > 0.001:
-                        torque += -1 * (m * const_v / dt)
+                    torque += -1 * (m * const_v / dt)
                 else:
                     impulse_start = False
         else:
