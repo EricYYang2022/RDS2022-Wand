@@ -25,7 +25,7 @@ def main():
     m = 0.001
     const_v = 0
     t = 0
-    impulse_time = 0.020
+    impulse_time = 0.010
     dt = 0.005
 
     while True:
@@ -46,6 +46,7 @@ def main():
         if impulse_wall:
             # Send impulse force if impulse false is positive
             if t < impulse_time:
+                # if t < impulse time,
                 t += dt
                 torque += -1 * (m * const_v / dt)
             else:
