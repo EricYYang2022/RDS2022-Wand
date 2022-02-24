@@ -13,20 +13,20 @@ def main():
     m1.controller.config.control_mode = CONTROL_MODE_TORQUE_CONTROL
     m1.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
 
-    # Setting constants up
-
+    # Setting variables for mass_spring_damper
     wall = 0.5
     kp = 10
     kv = 0.05
 
+    # Setting impulse wall force to be false
+    impulse_wall = False
+
+    # Setting variables for impulse
+    m = 0.001
+    const_v = 0
     t = 0
     impulse_time = 0.020
     dt = 0.005
-
-    # Setting impulse wall force to be false
-    impulse_wall = False
-    m = 0.001
-    const_v = 0
 
     while True:
         p = m1.encoder.pos_estimate
@@ -52,6 +52,7 @@ def main():
                 impulse_wall = False
 
         if p < wall - 0.1:
+            # if pos away from wall, reset time to be 0 to allow for impulse force
             t = 0
 
         m1.controller.input_torque = torque
