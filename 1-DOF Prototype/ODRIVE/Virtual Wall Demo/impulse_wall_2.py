@@ -24,11 +24,10 @@ def main():
     impulse_time = 0.020
     dt = 0.005
 
+    # Setting impulse wall force to be false
     impulse_wall = False
     m = 0.001
     const_v = 0
-
-    m1.controller.input_torque = 0.0
 
     while True:
         p = m1.encoder.pos_estimate

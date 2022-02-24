@@ -22,13 +22,11 @@ def main():
     impulse_time = 0.05
     dt = 0.005
 
+    # Impulse force and impulse start is turned off
     impulse_wall = False
     impulse_start = False
     m = 0.003
     const_v = 0
-
-    m1.controller.input_torque = 0.0
-    torque = 0.0
 
     while True:
         p = m1.encoder.pos_estimate
