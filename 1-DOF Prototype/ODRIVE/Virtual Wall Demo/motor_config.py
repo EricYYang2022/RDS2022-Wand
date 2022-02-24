@@ -65,10 +65,11 @@ def calibrate_encoder(m1):
 
 def Odrive_UART_setup(m):
     m.config.enable_uart_a = True
-    m.config.gpio1_mode = GPIO_MODE_DIGITAL
-    m.config.gpio2_mode = GPIO_MODE_DIGITAL
+    m.config.gpio1_mode = GPIO_MODE_UART_A
+    m.config.gpio2_mode = GPIO_MODE_UART_A
     m.config.uart_a_baudrate = 115200
-    m.config.uart0_protocol = STREAM_PROTOCOL_TYPE_ASCII_AND_STDOUT
+    m.config.uart0_protocol = STREAM_PROTOCOL_TYPE_FIBRE
+    m.save_configuration()
     m.reboot()
 
 

@@ -15,14 +15,14 @@ def main():
 
     # Setting variables for mass_spring_damper
     wall = 0.5
-    kp = 10
+    kp = 7
     kv = 0.05
 
     # Setting impulse wall force to be false
     impulse_wall = False
 
     # Setting variables for impulse
-    m = 0.001
+    m = 0.00005
     const_v = 0
     t = 0
     impulse_time = 0.010
