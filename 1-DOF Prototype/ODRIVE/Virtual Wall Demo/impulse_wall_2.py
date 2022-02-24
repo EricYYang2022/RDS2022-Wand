@@ -4,7 +4,6 @@ from odrive.enums import *
 
 
 def main():
-    global impulse_wall
     print("Finding an ODRIVE...")
     m = o.find_any()
     m1 = m.axis1
@@ -49,7 +48,6 @@ def main():
             if t < impulse_time:
                 t += dt
                 torque += -1 * (m * const_v / dt)
-                print("wall")
             else:
                 impulse_wall = False
 
