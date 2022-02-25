@@ -1,0 +1,5 @@
+Level: Error
+Message: Uncaught ReferenceError: PartSupplyDownloadEventHandler is not defined
+Source: file:///C:/Users/meman/AppData/Local/Temp/swcachedir/SWMarketplaceAddin/PartSupply/downloadmanagerui.html
+Line: 239
+-----------------------

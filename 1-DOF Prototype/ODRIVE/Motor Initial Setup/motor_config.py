@@ -40,7 +40,8 @@ def configure_motor_settings(m):
     m.save_configuration()
 
 
-def calibrate_motor(m):
+def calibrate_motor(m1):
+    m = m1.axis1
     m.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
     print("Starting Full Motor Calibration")
     time.sleep(20)
@@ -48,7 +49,8 @@ def calibrate_motor(m):
     print("Motor Calibrated")
 
 
-def calibrate_encoder(m):
+def calibrate_encoder(m1):
+    m = m1.axis1
     print("Starting Encoder Calibration")
     m.encoder.config.use_index = True
     m.requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH
