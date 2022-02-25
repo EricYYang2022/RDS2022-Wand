@@ -2,9 +2,9 @@
 %bit slow but the basic idea is we look at a certain x, y position, find
 %the thetas corresponding to that, and then generate the forces in each
 %direction.
-
-NX = 25;
-NY = 25;
+clear; close all; clc
+NX = 15;
+NY = 15;
 tau1 = [-1, -1, 1, 1]*0.536;
 tau2 = [-1, 1, -1, 1]*0.536;
 
@@ -12,8 +12,8 @@ a = 0.1;
 b = 0.5;
 
 syms t1 t2
-X = b*cos(t1)+b*cos(180+t2);
-Y = b*sin(t1)+b*sin(180+t2);
+X = b*cos(t1)+b*cos(pi+t2);
+Y = b*sin(t1)+b*sin(pi+t2);
 
 xspace = linspace(0, 1, NX);
 yspace = linspace(-0.5, 0.5, NY);
@@ -49,7 +49,7 @@ for i = 1:NX
         max_x = -Inf;
         max_y = -Inf;
         max_f = -Inf;
-        if i == 1 && j == 1
+
         for l = 1:numsols
             theta1_curr = double(theta1(l));
             theta2_curr = double(theta2(l));
@@ -67,25 +67,21 @@ for i = 1:NX
             while theta2_curr > pi
                 theta2_curr = theta2_curr - 2*pi;
             end
-
             %invalid cases
             if ((~isreal([theta1_curr, theta2_curr])) || (theta2_curr - 35*pi/180 < theta1_curr || theta2_curr > pi - 35*pi/180 + theta1_curr)) 
 
 %             if (~isreal([theta1_curr, theta2_curr]) && ...
 %                 ((theta1_curr <= 0 && theta1_curr >= -pi/2) && (theta2_curr <= pi && theta2_curr >= -pi/2))) ...
 %                 || (theta2_curr - 35*pi/180 < theta1_curr || theta2_curr > pi - 35*pi/180 + theta1_curr) 
-                F_tablex1(i, j) = nan;
-                F_tabley1(i, j) = nan;
-                F_tablex2(i, j) = nan;
-                F_tabley2(i, j) = nan;
-                F_table(i, j) = nan;
+
                 continue;
             end
     
-            
-    
             tau = [0; 0;];
-            
+            if i == 1 && j == 1
+                fprintf("My current x, y is: (%.3f %.3f)", xspace(i), yspace(j))
+                fprintf("According to my X, Y equations, my x, y is")
+            end
             for k = 1:4
                 tau(1) = tau1(k);
                 tau(2) = tau2(k);

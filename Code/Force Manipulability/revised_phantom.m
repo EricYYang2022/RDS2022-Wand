@@ -78,16 +78,17 @@ for i = 1:NX
             end
     
             tau = [0; 0;];
-            
+            if i == 1 && j == 1
+                fprintf("My current x, y is: (%.3f %.3f)", xspace(i), yspace(j))
+                fprintf("According to my X, Y equations, my x, y is: (%.3f, %.3f)", subs(X,[t1, t2], [theta1_curr, theta2_curr]), subs(Y,[t1, t2], [theta1_curr, theta2_curr]));
+            end
+
             for k = 1:4
                 tau(1) = tau1(k);
                 tau(2) = tau2(k);
                 J_curr = [J11(theta1_curr), J12(theta2_curr); J21(theta1_curr), J22(theta2_curr)]';
                 F_curr = pinv(J_curr, 1e-4) * tau * 10;
                 
-                if i == 1 && j == 1
-                    F_curr
-                end
 
                 if F_curr(1) > max_x
                     max_x = F_curr(1);
