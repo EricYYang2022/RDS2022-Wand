@@ -1,11 +1,12 @@
 import odrive as o
 from odrive.enums import *
+import time
 
 
 def impulse_wall_demo():
     """
     Impulse Wall Demo for virtual wall for RDS Wand 1-DOF Subsystem Prototype
-    :return: Torque commands to motor to generate virtual wall
+    :return: csv file of Torque, Position, and Velocity against time
     """
     # Connecting to an ODrive
     print("Finding an ODRIVE...")
@@ -50,8 +51,8 @@ def impulse_wall_demo():
                 const_v = v + 0.0
 
             if impulse_enabled:
-                # Send impulse force if impulse false is positive
-                if t < impulse_time and v > 0.0:
+                # Send impulse force if impulse enabled is positive
+                if t < impulse_time:
                     torque += -1 * (m * const_v / dt)
                 else:
                     impulse_enabled = False

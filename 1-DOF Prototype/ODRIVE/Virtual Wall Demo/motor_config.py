@@ -9,12 +9,12 @@ def configure_motor_settings(m):
     :param m: ODRIVE Motor (odrv0)
     :return: Configured motors according to Maxon Motor
     """
-    """
+
     # Current Limit:
     m.axis1.motor.config.current_lim = 9.28
     
     # Velocity Limit:
-    m.axis1.controller.config.vel_limit = 0.001
+    m.axis1.controller.config.vel_limit = 2.5
 
     # Calibration current
     m.axis1.motor.config.calibration_current = 10
@@ -31,16 +31,23 @@ def configure_motor_settings(m):
     # Torque Constant for the Motor (torque per motor amp)
     m.axis1.motor.config.torque_constant = 0.0525
 
+    # Type of motor
     m.axis1.motor.config.motor_type = MOTOR_TYPE_HIGH_CURRENT
 
+    # Torque Constant for the Motor (torque per motor amp)
     m.axis1.encoder.config.cpr = 8192
 
     m.config_brake_resistance = 0.5
-    """
+
     m.save_configuration()
 
 
 def calibrate_motor(m1):
+    """
+    Runs full motor calibration and sets pre-calibrated value to True
+    :param m1: Odrive.axis1
+    :return: Calibrated Motor
+    """
     m = m1.axis1
     m.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
     print("Starting Full Motor Calibration")
@@ -50,6 +57,11 @@ def calibrate_motor(m1):
 
 
 def calibrate_encoder(m1):
+    """
+    Runs full encoder calibration and sets pre-calibrated value to True
+    :param m1: odrive.axis1
+    :return: Calibrated encoder
+    """
     m = m1.axis1
     print("Starting Encoder Calibration")
     m.encoder.config.use_index = True
@@ -64,6 +76,11 @@ def calibrate_encoder(m1):
 
 
 def Odrive_UART_setup(m):
+    """
+    Configured the UART on the ODrive
+    :param m: odrive
+    :return: Configured UART
+    """
     m.config.enable_uart_a = True
     m.config.gpio1_mode = GPIO_MODE_UART_A
     m.config.gpio2_mode = GPIO_MODE_UART_A
@@ -74,6 +91,9 @@ def Odrive_UART_setup(m):
 
 
 def main():
+    """
+    Asks user to run motor config, calibration, and UART configuration
+    """
     print("Finding an ODRIVE...")
     m1 = o.find_any()
     print("ODRIVE Connected...")
