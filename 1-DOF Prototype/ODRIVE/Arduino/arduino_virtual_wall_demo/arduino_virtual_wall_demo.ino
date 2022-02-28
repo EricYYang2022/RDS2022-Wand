@@ -11,7 +11,7 @@ template<>        inline Print& operator <<(Print &obj, float arg) { obj.print(a
 ////////////////////////////////
 // Set up serial pins to the ODrive
 ////////////////////////////////
-HardwareSerial& odrive_serial = Serial2;
+HardwareSerial& odrive_serial = Serial;
 
 // ODrive object
 ODriveArduino odrive(odrive_serial);
