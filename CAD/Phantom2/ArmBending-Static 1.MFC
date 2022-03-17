@@ -1,0 +1,16 @@
+[StartTime]
+ArmBending-Static 1.MFC=26s
+[SolverState]
+ArmBending-Static 1.MFC=2
+[MainFrame]
+ArmBending-Static 1.MFC=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPBNCAAAAAIBOPPPPPJDEAAAAALOOPPPPP
+[ShowMin]
+ArmBending-Static 1.MFC=No
+[SolverType]
+ArmBending-Static 1.MFC=Linear Analysis
+[StudyType]
+ArmBending-Static 1.MFC=0
+[StudyName]
+ArmBending-Static 1.MFC=Static 1
+[Solver]
+ArmBending-Static 1.MFC=Sparse
