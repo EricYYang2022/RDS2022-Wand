@@ -1,0 +1,16 @@
+[StartTime]
+PivotPlateBearing-Static 4.MFC=
+[SolverState]
+PivotPlateBearing-Static 4.MFC=2
+[MainFrame]
+PivotPlateBearing-Static 4.MFC=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPMECAAAAAHEBAAAAAELDAAAAAKBCAAAAA
+[ShowMin]
+PivotPlateBearing-Static 4.MFC=No
+[SolverType]
+PivotPlateBearing-Static 4.MFC=Linear Analysis
+[StudyType]
+PivotPlateBearing-Static 4.MFC=0
+[StudyName]
+PivotPlateBearing-Static 4.MFC=Static 4
+[Solver]
+PivotPlateBearing-Static 4.MFC=Iterative
