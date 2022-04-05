@@ -1,0 +1,860 @@
+_______________________________________
+
+Currently investigating the point [0.000, -0.500] with an angle configuration of [-30.000, 30.000] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [21.440, 0.000, 21.440]
+
+Currently investigating the point [0.000, -0.500] with an angle configuration of [-150.000, 150.000] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [21.440, 0.000, 21.440]
+_______________________________________
+
+Currently investigating the point [0.000, -0.389] with an angle configuration of [-22.885, 22.885] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [27.566, 0.000, 27.566]
+
+Currently investigating the point [0.000, -0.389] with an angle configuration of [-157.115, 157.115] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [27.566, 0.000, 27.566]
+_______________________________________
+
+Currently investigating the point [0.000, -0.278] with an angle configuration of [-16.128, 16.128] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, -0.278] with an angle configuration of [-163.872, 163.872] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, -0.167] with an angle configuration of [-9.594, 9.594] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, -0.167] with an angle configuration of [-170.406, 170.406] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, -0.056] with an angle configuration of [-3.185, 3.185] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, -0.056] with an angle configuration of [-176.815, 176.815] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, 0.056] with an angle configuration of [3.185, -3.185] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, 0.056] with an angle configuration of [176.815, -176.815] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, 0.167] with an angle configuration of [9.594, -9.594] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, 0.167] with an angle configuration of [170.406, -170.406] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, 0.278] with an angle configuration of [16.128, -16.128] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, 0.278] with an angle configuration of [163.872, -163.872] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, 0.389] with an angle configuration of [22.885, -22.885] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, 0.389] with an angle configuration of [157.115, -157.115] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.000, 0.500] with an angle configuration of [30.000, -30.000] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.000, 0.500] with an angle configuration of [150.000, -150.000] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, -0.500] with an angle configuration of [-18.281, 43.339] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [20.431, 4.540, 20.929]
+
+Currently investigating the point [0.111, -0.500] with an angle configuration of [-136.661, 161.719] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [20.431, 4.540, 20.929]
+_______________________________________
+
+Currently investigating the point [0.111, -0.389] with an angle configuration of [-7.911, 39.802] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [25.485, 7.282, 26.505]
+
+Currently investigating the point [0.111, -0.389] with an angle configuration of [-140.198, 172.089] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [25.485, 7.282, 26.505]
+_______________________________________
+
+Currently investigating the point [0.111, -0.278] with an angle configuration of [4.393, 39.210] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, -0.278] with an angle configuration of [-140.790, -175.607] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, -0.167] with an angle configuration of [22.135, 45.245] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, -0.167] with an angle configuration of [-134.755, -157.865] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, -0.056] with an angle configuration of [56.299, 70.571] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, -0.056] with an angle configuration of [-109.429, -123.701] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, 0.056] with an angle configuration of [-56.299, -70.571] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, 0.056] with an angle configuration of [109.429, 123.701] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, 0.167] with an angle configuration of [-22.135, -45.245] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, 0.167] with an angle configuration of [134.755, 157.865] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, 0.278] with an angle configuration of [-4.393, -39.210] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, 0.278] with an angle configuration of [140.790, 175.607] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, 0.389] with an angle configuration of [7.911, -39.802] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, 0.389] with an angle configuration of [140.198, -172.089] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.111, 0.500] with an angle configuration of [18.281, -43.339] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.111, 0.500] with an angle configuration of [136.661, -161.719] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.222, -0.500] with an angle configuration of [-9.210, 57.135] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [17.904, 7.957, 19.592]
+
+Currently investigating the point [0.222, -0.500] with an angle configuration of [-122.865, 170.790] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [17.904, 7.957, 19.592]
+_______________________________________
+
+Currently investigating the point [0.222, -0.389] with an angle configuration of [3.136, 56.354] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [20.780, 11.874, 23.934]
+
+Currently investigating the point [0.222, -0.389] with an angle configuration of [-123.646, -176.864] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [20.780, 11.874, 23.934]
+_______________________________________
+
+Currently investigating the point [0.222, -0.278] with an angle configuration of [17.822, 59.498] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [23.532, 18.825, 30.135]
+
+Currently investigating the point [0.222, -0.278] with an angle configuration of [-120.502, -162.178] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [23.532, 18.825, 30.135]
+_______________________________________
+
+Currently investigating the point [0.222, -0.167] with an angle configuration of [37.002, 69.258] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, -0.167] with an angle configuration of [-110.742, -142.998] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.222, -0.056] with an angle configuration of [62.722, 89.206] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, -0.056] with an angle configuration of [-90.794, -117.278] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.222, 0.056] with an angle configuration of [-62.722, -89.206] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, 0.056] with an angle configuration of [90.794, 117.278] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.222, 0.167] with an angle configuration of [-37.002, -69.258] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, 0.167] with an angle configuration of [110.742, 142.998] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.222, 0.278] with an angle configuration of [-17.822, -59.498] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, 0.278] with an angle configuration of [120.502, 162.178] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [23.532, 18.825, 30.135]
+Final max forces to are: [x, y, norm]: [23.532, 18.825, 30.135]
+_______________________________________
+
+Currently investigating the point [0.222, 0.389] with an angle configuration of [-3.136, -56.354] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, 0.389] with an angle configuration of [123.646, 176.864] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [20.780, 11.874, 23.934]
+Final max forces to are: [x, y, norm]: [20.780, 11.874, 23.934]
+_______________________________________
+
+Currently investigating the point [0.222, 0.500] with an angle configuration of [9.210, -57.135] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.222, 0.500] with an angle configuration of [122.865, -170.790] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.333, -0.500] with an angle configuration of [-3.246, 70.626] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [14.843, 9.895, 17.839]
+
+Currently investigating the point [0.333, -0.500] with an angle configuration of [-109.374, 176.754] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [14.843, 9.895, 17.839]
+_______________________________________
+
+Currently investigating the point [0.333, -0.389] with an angle configuration of [9.791, 71.412] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [15.891, 13.621, 20.929]
+
+Currently investigating the point [0.333, -0.389] with an angle configuration of [-108.588, -170.209] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [15.891, 13.621, 20.929]
+_______________________________________
+
+Currently investigating the point [0.333, -0.278] with an angle configuration of [24.479, 75.910] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [15.816, 18.980, 24.706]
+
+Currently investigating the point [0.333, -0.278] with an angle configuration of [-104.090, -155.521] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [15.816, 18.980, 24.706]
+_______________________________________
+
+Currently investigating the point [0.333, -0.167] with an angle configuration of [41.554, 85.316] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [12.864, 25.728, 28.765]
+
+Currently investigating the point [0.333, -0.167] with an angle configuration of [-94.684, -138.446] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [12.864, 25.728, 28.765]
+_______________________________________
+
+Currently investigating the point [0.333, -0.056] with an angle configuration of [60.787, 100.289] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.215, 31.291, 31.722]
+
+Currently investigating the point [0.333, -0.056] with an angle configuration of [-79.711, -119.213] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [5.215, 31.291, 31.722]
+_______________________________________
+
+Currently investigating the point [0.333, 0.056] with an angle configuration of [-60.787, -100.289] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.333, 0.056] with an angle configuration of [79.711, 119.213] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.215, 31.291, 31.722]
+Final max forces to are: [x, y, norm]: [5.215, 31.291, 31.722]
+_______________________________________
+
+Currently investigating the point [0.333, 0.167] with an angle configuration of [-41.554, -85.316] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.333, 0.167] with an angle configuration of [94.684, 138.446] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [12.864, 25.728, 28.765]
+Final max forces to are: [x, y, norm]: [12.864, 25.728, 28.765]
+_______________________________________
+
+Currently investigating the point [0.333, 0.278] with an angle configuration of [-24.479, -75.910] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.333, 0.278] with an angle configuration of [104.090, 155.521] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [15.816, 18.980, 24.706]
+Final max forces to are: [x, y, norm]: [15.816, 18.980, 24.706]
+_______________________________________
+
+Currently investigating the point [0.333, 0.389] with an angle configuration of [-9.791, -71.412] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.333, 0.389] with an angle configuration of [108.588, 170.209] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [15.891, 13.621, 20.929]
+Final max forces to are: [x, y, norm]: [15.891, 13.621, 20.929]
+_______________________________________
+
+Currently investigating the point [0.333, 0.500] with an angle configuration of [3.246, -70.626] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.333, 0.500] with an angle configuration of [109.374, -176.754] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.444, -0.500] with an angle configuration of [-0.355, 83.622] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [11.977, 10.646, 16.024]
+
+Currently investigating the point [0.444, -0.500] with an angle configuration of [-96.378, 179.645] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [11.977, 10.646, 16.024]
+_______________________________________
+
+Currently investigating the point [0.444, -0.389] with an angle configuration of [12.617, 85.011] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [11.953, 13.661, 18.152]
+
+Currently investigating the point [0.444, -0.389] with an angle configuration of [-94.989, -167.383] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [11.953, 13.661, 18.152]
+_______________________________________
+
+Currently investigating the point [0.444, -0.278] with an angle configuration of [26.386, 89.603] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [10.840, 17.345, 20.454]
+
+Currently investigating the point [0.444, -0.278] with an angle configuration of [-90.397, -153.614] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [10.840, 17.345, 20.454]
+_______________________________________
+
+Currently investigating the point [0.444, -0.167] with an angle configuration of [41.106, 97.782] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [7.930, 21.146, 22.584]
+
+Currently investigating the point [0.444, -0.167] with an angle configuration of [-82.218, -138.894] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [7.930, 21.146, 22.584]
+_______________________________________
+
+Currently investigating the point [0.444, -0.056] with an angle configuration of [56.266, 109.484] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [2.969, 23.749, 23.934]
+
+Currently investigating the point [0.444, -0.056] with an angle configuration of [-70.516, -123.734] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [2.969, 23.749, 23.934]
+_______________________________________
+
+Currently investigating the point [0.444, 0.056] with an angle configuration of [-56.266, -109.484] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.444, 0.056] with an angle configuration of [70.516, 123.734] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [2.969, 23.749, 23.934]
+Final max forces to are: [x, y, norm]: [2.969, 23.749, 23.934]
+_______________________________________
+
+Currently investigating the point [0.444, 0.167] with an angle configuration of [-41.106, -97.782] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.444, 0.167] with an angle configuration of [82.218, 138.894] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [7.930, 21.146, 22.584]
+Final max forces to are: [x, y, norm]: [7.930, 21.146, 22.584]
+_______________________________________
+
+Currently investigating the point [0.444, 0.278] with an angle configuration of [-26.386, -89.603] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.444, 0.278] with an angle configuration of [90.397, 153.614] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [10.840, 17.345, 20.454]
+Final max forces to are: [x, y, norm]: [10.840, 17.345, 20.454]
+_______________________________________
+
+Currently investigating the point [0.444, 0.389] with an angle configuration of [-12.617, -85.011] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.444, 0.389] with an angle configuration of [94.989, 167.383] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [11.953, 13.661, 18.152]
+Final max forces to are: [x, y, norm]: [11.953, 13.661, 18.152]
+_______________________________________
+
+Currently investigating the point [0.444, 0.500] with an angle configuration of [0.355, -83.622] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.444, 0.500] with an angle configuration of [96.378, -179.645] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.556, -0.500] with an angle configuration of [-0.355, 96.380] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [9.595, 10.661, 14.343]
+
+Currently investigating the point [0.556, -0.500] with an angle configuration of [-83.620, 179.645] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [9.595, 10.661, 14.343]
+_______________________________________
+
+Currently investigating the point [0.556, -0.389] with an angle configuration of [12.309, 97.707] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [9.065, 12.950, 15.808]
+
+Currently investigating the point [0.556, -0.389] with an angle configuration of [-82.293, -167.691] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [9.065, 12.950, 15.808]
+_______________________________________
+
+Currently investigating the point [0.556, -0.278] with an angle configuration of [25.036, 101.834] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [7.718, 15.437, 17.259]
+
+Currently investigating the point [0.556, -0.278] with an angle configuration of [-78.166, -154.964] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [7.718, 15.437, 17.259]
+_______________________________________
+
+Currently investigating the point [0.556, -0.167] with an angle configuration of [37.849, 108.752] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.311, 17.703, 18.482]
+
+Currently investigating the point [0.556, -0.167] with an angle configuration of [-71.248, -142.151] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [5.311, 17.703, 18.482]
+_______________________________________
+
+Currently investigating the point [0.556, -0.056] with an angle configuration of [50.349, 118.230] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [1.910, 19.105, 19.200]
+
+Currently investigating the point [0.556, -0.056] with an angle configuration of [-61.770, -129.651] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [1.910, 19.105, 19.200]
+_______________________________________
+
+Currently investigating the point [0.556, 0.056] with an angle configuration of [-50.349, -118.230] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.556, 0.056] with an angle configuration of [61.770, 129.651] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [1.910, 19.105, 19.200]
+Final max forces to are: [x, y, norm]: [1.910, 19.105, 19.200]
+_______________________________________
+
+Currently investigating the point [0.556, 0.167] with an angle configuration of [-37.849, -108.752] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.556, 0.167] with an angle configuration of [71.248, 142.151] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.311, 17.703, 18.482]
+Final max forces to are: [x, y, norm]: [5.311, 17.703, 18.482]
+_______________________________________
+
+Currently investigating the point [0.556, 0.278] with an angle configuration of [-25.036, -101.834] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.556, 0.278] with an angle configuration of [78.166, 154.964] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [7.718, 15.437, 17.259]
+Final max forces to are: [x, y, norm]: [7.718, 15.437, 17.259]
+_______________________________________
+
+Currently investigating the point [0.556, 0.389] with an angle configuration of [-12.309, -97.707] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.556, 0.389] with an angle configuration of [82.293, 167.691] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [9.065, 12.950, 15.808]
+Final max forces to are: [x, y, norm]: [9.065, 12.950, 15.808]
+_______________________________________
+
+Currently investigating the point [0.556, 0.500] with an angle configuration of [0.355, -96.380] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.556, 0.500] with an angle configuration of [83.620, -179.645] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.667, -0.500] with an angle configuration of [-3.313, 109.573] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [7.718, 10.291, 12.864]
+
+Currently investigating the point [0.667, -0.500] with an angle configuration of [-70.427, 176.687] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [7.718, 10.291, 12.864]
+_______________________________________
+
+Currently investigating the point [0.667, -0.389] with an angle configuration of [9.228, 110.260] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [6.999, 11.998, 13.890]
+
+Currently investigating the point [0.667, -0.389] with an angle configuration of [-69.740, -170.772] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [6.999, 11.998, 13.890]
+_______________________________________
+
+Currently investigating the point [0.667, -0.278] with an angle configuration of [21.142, 113.618] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.709, 13.701, 14.843]
+
+Currently investigating the point [0.667, -0.278] with an angle configuration of [-66.382, -158.858] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [5.709, 13.701, 14.843]
+_______________________________________
+
+Currently investigating the point [0.667, -0.167] with an angle configuration of [32.556, 119.371] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [3.784, 15.134, 15.600]
+
+Currently investigating the point [0.667, -0.167] with an angle configuration of [-60.629, -147.444] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [3.784, 15.134, 15.600]
+_______________________________________
+
+Currently investigating the point [0.667, -0.056] with an angle configuration of [43.248, 127.225] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [1.331, 15.969, 16.024]
+
+Currently investigating the point [0.667, -0.056] with an angle configuration of [-52.775, -136.752] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [1.331, 15.969, 16.024]
+_______________________________________
+
+Currently investigating the point [0.667, 0.056] with an angle configuration of [-43.248, -127.225] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.667, 0.056] with an angle configuration of [52.775, 136.752] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [1.331, 15.969, 16.024]
+Final max forces to are: [x, y, norm]: [1.331, 15.969, 16.024]
+_______________________________________
+
+Currently investigating the point [0.667, 0.167] with an angle configuration of [-32.556, -119.371] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.667, 0.167] with an angle configuration of [60.629, 147.444] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [3.784, 15.134, 15.600]
+Final max forces to are: [x, y, norm]: [3.784, 15.134, 15.600]
+_______________________________________
+
+Currently investigating the point [0.667, 0.278] with an angle configuration of [-21.142, -113.618] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.667, 0.278] with an angle configuration of [66.382, 158.858] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.709, 13.701, 14.843]
+Final max forces to are: [x, y, norm]: [5.709, 13.701, 14.843]
+_______________________________________
+
+Currently investigating the point [0.667, 0.389] with an angle configuration of [-9.228, -110.260] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.667, 0.389] with an angle configuration of [69.740, 170.772] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [6.999, 11.998, 13.890]
+Final max forces to are: [x, y, norm]: [6.999, 11.998, 13.890]
+_______________________________________
+
+Currently investigating the point [0.667, 0.500] with an angle configuration of [3.313, -109.573] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.667, 0.500] with an angle configuration of [70.427, -176.687] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.778, -0.500] with an angle configuration of [-10.348, 124.877] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [6.269, 9.752, 11.594]
+
+Currently investigating the point [0.778, -0.500] with an angle configuration of [-55.123, 169.652] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [6.269, 9.752, 11.594]
+_______________________________________
+
+Currently investigating the point [0.778, -0.389] with an angle configuration of [3.025, 123.845] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.513, 11.026, 12.328]
+
+Currently investigating the point [0.778, -0.389] with an angle configuration of [-56.155, -176.975] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [5.513, 11.026, 12.328]
+_______________________________________
+
+Currently investigating the point [0.778, -0.278] with an angle configuration of [14.667, 126.025] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [4.366, 12.224, 12.980]
+
+Currently investigating the point [0.778, -0.278] with an angle configuration of [-53.975, -165.333] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [4.366, 12.224, 12.980]
+_______________________________________
+
+Currently investigating the point [0.778, -0.167] with an angle configuration of [25.209, 130.602] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [2.824, 13.178, 13.477]
+
+Currently investigating the point [0.778, -0.167] with an angle configuration of [-49.398, -154.791] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [2.824, 13.178, 13.477]
+_______________________________________
+
+Currently investigating the point [0.778, -0.056] with an angle configuration of [34.676, 137.153] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [0.979, 13.713, 13.748]
+
+Currently investigating the point [0.778, -0.056] with an angle configuration of [-42.847, -145.324] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [0.979, 13.713, 13.748]
+_______________________________________
+
+Currently investigating the point [0.778, 0.056] with an angle configuration of [-34.676, -137.153] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.778, 0.056] with an angle configuration of [42.847, 145.324] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [0.979, 13.713, 13.748]
+Final max forces to are: [x, y, norm]: [0.979, 13.713, 13.748]
+_______________________________________
+
+Currently investigating the point [0.778, 0.167] with an angle configuration of [-25.209, -130.602] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.778, 0.167] with an angle configuration of [49.398, 154.791] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [2.824, 13.178, 13.477]
+Final max forces to are: [x, y, norm]: [2.824, 13.178, 13.477]
+_______________________________________
+
+Currently investigating the point [0.778, 0.278] with an angle configuration of [-14.667, -126.025] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.778, 0.278] with an angle configuration of [53.975, 165.333] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [4.366, 12.224, 12.980]
+Final max forces to are: [x, y, norm]: [4.366, 12.224, 12.980]
+_______________________________________
+
+Currently investigating the point [0.778, 0.389] with an angle configuration of [-3.025, -123.845] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.778, 0.389] with an angle configuration of [56.155, 176.975] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [5.513, 11.026, 12.328]
+Final max forces to are: [x, y, norm]: [5.513, 11.026, 12.328]
+_______________________________________
+
+Currently investigating the point [0.778, 0.500] with an angle configuration of [10.348, -124.877] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.778, 0.500] with an angle configuration of [55.123, -169.652] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.889, -0.500] with an angle configuration of [-29.358, 150.642] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [0.889, -0.500] with an angle configuration of [-29.358, 150.642] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.889, -0.389] with an angle configuration of [-9.615, 142.356] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.889, -0.389] with an angle configuration of [-37.644, 170.385] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.889, -0.278] with an angle configuration of [4.011, 141.281] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [3.433, 10.987, 11.511]
+
+Currently investigating the point [0.889, -0.278] with an angle configuration of [-38.719, -175.989] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [3.433, 10.987, 11.511]
+_______________________________________
+
+Currently investigating the point [0.889, -0.167] with an angle configuration of [14.641, 144.120] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [2.184, 11.650, 11.853]
+
+Currently investigating the point [0.889, -0.167] with an angle configuration of [-35.880, -165.359] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [2.184, 11.650, 11.853]
+_______________________________________
+
+Currently investigating the point [0.889, -0.056] with an angle configuration of [23.472, 149.375] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [0.751, 12.013, 12.037]
+
+Currently investigating the point [0.889, -0.056] with an angle configuration of [-30.625, -156.528] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [0.751, 12.013, 12.037]
+_______________________________________
+
+Currently investigating the point [0.889, 0.056] with an angle configuration of [-23.472, -149.375] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.889, 0.056] with an angle configuration of [30.625, 156.528] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [0.751, 12.013, 12.037]
+Final max forces to are: [x, y, norm]: [0.751, 12.013, 12.037]
+_______________________________________
+
+Currently investigating the point [0.889, 0.167] with an angle configuration of [-14.641, -144.120] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.889, 0.167] with an angle configuration of [35.880, 165.359] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [2.184, 11.650, 11.853]
+Final max forces to are: [x, y, norm]: [2.184, 11.650, 11.853]
+_______________________________________
+
+Currently investigating the point [0.889, 0.278] with an angle configuration of [-4.011, -141.281] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.889, 0.278] with an angle configuration of [38.719, 175.989] (degrees).
+Determined that the angle configuration was valid.
+Solved forces to be: [x, y, norm]: [3.433, 10.987, 11.511]
+Final max forces to are: [x, y, norm]: [3.433, 10.987, 11.511]
+_______________________________________
+
+Currently investigating the point [0.889, 0.389] with an angle configuration of [9.615, -142.356] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+
+Currently investigating the point [0.889, 0.389] with an angle configuration of [37.644, -170.385] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is infeasible due to a collision..
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [0.889, 0.500] with an angle configuration of [29.358, -150.642] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [0.889, 0.500] with an angle configuration of [29.358, -150.642] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, -0.500] with an angle configuration of [-26.565, 153.435] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, -0.500] with an angle configuration of [-26.565, 153.435] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, -0.389] with an angle configuration of [-21.251, 158.749] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, -0.389] with an angle configuration of [-21.251, 158.749] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, -0.278] with an angle configuration of [-15.524, 164.476] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, -0.278] with an angle configuration of [-15.524, 164.476] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, -0.167] with an angle configuration of [-9.462, 170.538] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, -0.167] with an angle configuration of [-9.462, 170.538] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, -0.056] with an angle configuration of [-3.180, 176.820] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, -0.056] with an angle configuration of [-3.180, 176.820] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, 0.056] with an angle configuration of [3.180, -176.820] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, 0.056] with an angle configuration of [3.180, -176.820] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, 0.167] with an angle configuration of [9.462, -170.538] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, 0.167] with an angle configuration of [9.462, -170.538] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, 0.278] with an angle configuration of [15.524, -164.476] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, 0.278] with an angle configuration of [15.524, -164.476] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, 0.389] with an angle configuration of [21.251, -158.749] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, 0.389] with an angle configuration of [21.251, -158.749] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
+_______________________________________
+
+Currently investigating the point [1.000, 0.500] with an angle configuration of [26.565, -153.435] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+
+Currently investigating the point [1.000, 0.500] with an angle configuration of [26.565, -153.435] (degrees).
+Determined that the angle configuration to be invalid because the angle solution is not real.
+Final max forces to are: [x, y, norm]: [-Inf, -Inf, -Inf]
