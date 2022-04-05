@@ -11,9 +11,8 @@ template<>        inline Print& operator <<(Print &obj, float arg) { obj.print(a
 ////////////////////////////////
 // Set up serial pins to the ODrive
 ////////////////////////////////
-HardwareSerial& odrive_serial = Serial;
+HardwareSerial& odrive_serial = Serial1;
 
-// ODrive object
 ODriveArduino odrive(odrive_serial);
 
 // setup motor axis constant
@@ -47,27 +46,25 @@ void setup() {
   Serial.println("ODriveArduino");
 
   // Set Torque to 0
-  odrive.SetCurrent(m, 0.0f);
-
+  float t_0 = 0.0;
+  odrive.SetCurrent(m, t_0);
+  
   // Set Torque Control
   int control_mode = CONTROL_MODE_TORQUE_CONTROL;
-  Serial << "w axis" << m << ".controller.config.control_mode " << control_mode << '\n';
+  odrive_serial << "w axis" << m << ".controller.config.control_mode " << control_mode << '\n';
 
   // Set up closed loop control
   int requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
-  if(!odrive.run_state(m, requested_state, false /*don't wait*/)) return;
+  odrive_serial << "w axis" << m << ".requested_state " << requested_state << '\n';
 }
 
 void loop() {
-  
-  float p = odrive.GetPosition(m);
-  float v = odrive.GetVelocity(m);
-  Serial.print("Pos: ");
-  Serial.print(p);
-  Serial.print(", vel: ");
-  Serial.println(v);
-  
   while (true) {
+    float p = odrive.GetPosition(m);
+    Serial << "pos: " << p << '\t';
+    float v = odrive.GetVelocity(m);
+    Serial << "vel: " << v << '\n';
+    
     if (p >= wall){
       // If within wall send the spring mass damper, send spring mass torque
       torque = -1 * kp * (p - wall) + -1 * kv * v;
