@@ -19,8 +19,6 @@ double* convertStrtoArr4x4(char* str)
 
   // Iterates through all tokens
   while ( token != NULL ) {
-    std::cout << token << "\n";
-
     array1[j][i] = std::stof(token);
 
     // iterates through the array
