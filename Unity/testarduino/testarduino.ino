@@ -8,12 +8,14 @@ void loop() {
   // if we get a valid byte, read analog ins:
   if (Serial.available() > 0) {
     // get incoming byte:
-//    inByte = Serial.readStringUntil('\r');
-    inByte = Serial.readString();
-    char* cString = (char*) malloc(sizeof(char)*(inByte.length() + 1));
+    // inByte = Serial.readStringUntil('\r');
+    // inByte = Serial.readString(); <- uncomment this one
+    strcpy(inByte,"1,2,3,4,5,6,7,8,9");
+    char* cString = (char*) malloc(sizeof(char)*(strlen(inByte) + 1));
     char s[2] = ",";
     char *token;
-   
+
+    
      /* get the first token */
      token = strtok(inByte, s);
      
@@ -21,18 +23,10 @@ void loop() {
      while( token != NULL ) {
         Serial.println(token);
         Serial.println("\n");
-      
         token = strtok(NULL, s);
 //    inByte.toCharArray(cString, inByte.length() + 1);
 //    Serial.write(cString);
     
+      }
   }
-    
-   if (do_once == 0) {
-//   char inByte[20] = "Hi, Please, Work";
-   
-   }
-   do_once = 1;
-   }
-
 }
