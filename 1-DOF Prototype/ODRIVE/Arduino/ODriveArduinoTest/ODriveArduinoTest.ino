@@ -105,7 +105,7 @@ void loop() {
       static const unsigned long duration = 10000;
       unsigned long start = millis();
       while(millis() - start < duration) {
-        for (int motor = 0; motor < 2; ++motor) {
+        for (int motor = 1; motor < 2; ++motor) {
           Serial << odrive.GetPosition(motor) << '\t';
         }
         Serial << '\n';

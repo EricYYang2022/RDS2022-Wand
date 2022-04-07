@@ -16,7 +16,7 @@ HardwareSerial& odrive_serial = Serial1;
 ODriveArduino odrive(odrive_serial);
 
 // setup motor axis constant
-int m = '1';
+int m = 1;
 
 // Set constants for spring mass damper system
 float wall = 0.5;
@@ -61,13 +61,11 @@ void setup() {
 void loop() {
   while (true) {
     float p = odrive.GetPosition(m);
-    Serial << "pos: " << p << '\t';
     float v = odrive.GetVelocity(m);
-    Serial << "vel: " << v << '\n';
     
     if (p >= wall){
       // If within wall send the spring mass damper, send spring mass torque
-      torque = -1 * kp * (p - wall) + -1 * kv * v;
+      torque = -1.0 * kp * (p - wall) + -1.0 * kv * v;
 
       if (impulse_wall != true){
         // Turn on Impulse force if needed and set vel constant
@@ -79,7 +77,7 @@ void loop() {
       if (impulse_enabled == true) {
         // Send impulse force if impulse enabled is positive
         if (t < impulse_time) {
-          torque += -1 * (mass * const_v / dt);
+          torque += -1.0 * (mass * const_v / dt);
         }
         else {
           impulse_enabled = false;
