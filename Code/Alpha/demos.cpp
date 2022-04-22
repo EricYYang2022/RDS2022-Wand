@@ -1,67 +1,40 @@
-#include "demos.hpp"
-// #include "helpers.hpp"
-#include <stdio.h>
+#include <iostream>
+#include <cmath>
+#include <Eigen/Dense>
+#include <Eigen/Core>
+#include <Eigen/LU>
+#include <helpers.hpp>
 
-float whiteboard(int GR, float k, float c, float a){
-  
-  // clarify this with alex
-  float trig_matrix1, t1= trig_func();
-  float trig_matrix2, t2= trig_func();
+using Eigen::MatrixXf;
+using Eigen::VectorXf;
 
+VectorXf whiteboard(VectorXf GR, float k, float c, float a, float theta_to_pos){
+    MatrixXf trig_mat1 = trig_func(GR,theta_to_pos);
+    MatrixXf trig_mat2 = trig_func(GR,theta_to_pos);
 
-  float e_e1=ee_pos(trig_matrix1,a,t1);
-  float e_e2=ee_pos(trig_matrix2,a,t2);
-  //only add since we are manually doing o-drive data, all this code breaks if dt = 0
-  e_e2[3]=e_e2[3]+1;
-  //remove above
-  float dist=normal_dist(e_e2);
-  float v_wtime= vel_ee(e_e1,e_e2); 
-  float v= v_wtime[0:3];
-  float F = k*dist - c*v;
-  float motor_torque =  jacobian_torque(trig_matrix2,a,F,GR);
-  return motor_torque;
+    VectorXf ee1 = ee_pos(trig_mat1, a);
+    VectorXf ee2 = ee_pos(trig_mat2, a);
+    VectorXf dist = normal_dist(ee2);
+    VectorXf v_wt = vel_ee(ee1, ee2);
+    VectorXf F = k*dist -c*v_wt.segment(1,3);
+    VectorXf motor_torque =  jacobian_torque(trig_mat2, a, F, GR);
+    return(motor_torque);
 }
 
-float inertia(int GR,float a, float m){
-  float trig_matrix1,t = trig_func()
-  float trig_matrix2,t = trig_func()
-  float trig_matrix3,t = trig_func()
 
-  // modify pull to store 3 e_e positions at once
-  float e_e1=ee_pos(trig_matrix1,a,t)
-  float e_e2=ee_pos(trig_matrix2,a,t)
-  float e_e3=ee_pos(trig_matrix3,a,t)
-  // have to add to mock-up the odrive pull data:
-  e_e2[3]=e_e2[3]+1;
-  e_e3[3]= e_e3[3]+1;
+VectorXf inertia(VectorXf GR, float m, float a, float theta_to_pos){
+    MatrixXf trig_mat1 = trig_func(GR,theta_to_pos);
+    MatrixXf trig_mat2 = trig_func(GR,theta_to_pos);
+    MatrixXf trig_mat3 = trig_func(GR,theta_to_pos);
 
-  float accel=accel_ee(e_e1,e_e2,e_e3)
-  float F_go [3]= {0,0,m*-9.81}
-  float F= -(m*accel[0:3] - F_go)
-  float motor_torque =  jacobian_torque(trig_matrix3,a,F,GR)
-  return(motor_torque)
-}
+    VectorXf ee1 = ee_pos(trig_mat1, a);
+    VectorXf ee2 = ee_pos(trig_mat2, a);
+    VectorXf ee3 = ee_pos(trig_mat3, a);
 
-void past_wall(int GR, float k, float c, float a){
-     // clarify this with alex
-  float trig_matrix1, t1= trig_func();
-  float trig_matrix2, t2= trig_func();
+    VectorXf accel = accel_ee(ee1, ee2, ee3);
+    VectorXf F_gobj {0,0,m*-9.81};
+    VectorXf F = -(m*accel.segment(1,3) - F_gobj);
 
-
-  float e_e1=ee_pos(trig_matrix1,a,t1);
-  float e_e2=ee_pos(trig_matrix2,a,t2);
-  //only add since we are manually doing o-drive data, all this code breaks if dt = 0
-  e_e2[3]=e_e2[3]+1;
-  //remove above
-  float dist=normal_dist(e_e2);
-
-  if (dist<0) {
-      print("You are outside of the wall");
-  } 
-  else{
-      print("You are at or inside the wall");
-  }
-  printf('Distance from wall:%f',dist)
-
-
+    VectorXf motor_torque =  jacobian_torque(trig_mat3, a, F, GR);
+    return(motor_torque);
 }

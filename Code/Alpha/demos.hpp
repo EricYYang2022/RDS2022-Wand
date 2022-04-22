@@ -1,10 +1,14 @@
-#ifndef DEMOS_HPP
-#define DEMOS_HPP
+#include <iostream>
+#include <cmath>
+#include <Eigen/Dense>
+#include <Eigen/Core>
+#include <Eigen/LU>
+#include <helpers.hpp>
 
-float whiteboard(int GR, float k, float c, float a);
+using Eigen::MatrixXf;
+using Eigen::VectorXf;
 
-float inertia(int GR,float a, float m);
+VectorXf whiteboard(VectorXf GR, float k, float c, float a, float theta_to_pos);
 
-void past_wall(int GR, float k, float c, float a);
 
-#endif
+VectorXf inertia(VectorXf GR, float m, float a, float theta_to_pos);
