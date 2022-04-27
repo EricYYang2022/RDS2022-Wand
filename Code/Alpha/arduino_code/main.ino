@@ -118,14 +118,15 @@ Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
     return pos;
 }
 
-Vector<float, 3> normal_dist(Vector<float, 4> e_e){
+ 
+ Vector<float,1> normal_dist( Vector<float, 4>  e_e){
     float px,py,pz,nx,ny,nz;
     VectorXf temp = wall_vec ();
    
     Vector<float, 3> norm {temp(0),temp(1),temp(2)};
     Vector<float, 3> point = {temp(3),temp(4),temp(5)};
     Vector<float, 3> point_vec = point-e_e.head(3);
-    Vector<float, 3> norm_dist = point_vec.cwiseProduct(norm);
+    Vector<float,1> norm_dist {{ point_vec.dot(norm)}};
     return norm_dist;
 
 }
@@ -171,6 +172,29 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, float a, Vector<float, 3>
 }
 
 
+Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, float theta_to_pos, Vector<float, 6> wall, Vector<float, 4> motor_pos){
+    Vector<float,7> trig_mat1 = trig_func(GR,theta_to_pos, motor_pos);
+    Vector<float,7> trig_mat2 = trig_func(GR,theta_to_pos,motor_pos);
+    
+    trig_mat2(6) = 70;// only here for testing, trig-mat should be different
+
+    Vector<float, 4> ee1 = ee_pos(trig_mat1, a);
+    Vector<float, 4> ee2 = ee_pos(trig_mat2, a);
+    Vector<float, 1> norm = normal_dist(ee2);
+    float dist = norm(0);
+    Vector<float, 4> velocity = vel_ee(ee1, ee2);
+    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* (velocity.head(3)).dot(wall.head(3))*wall.head(3));
+    Vector<float, 3> motor_torque =  jacobian_torque(trig_mat2, a, Forces, GR);
+    Vector<float, 3> Zero_T {{0,0,0}};
+    if( dist >0){
+      return(motor_torque);
+    }
+    else{
+      return(Zero_T);
+    }
+}
+
+
 //global variables:
 float p_0;
 float v_0;
@@ -183,14 +207,13 @@ Vector<float, 4> ee_1;
 Vector<float, 4> ee_2;
 
 float a = 0.4767;
-float k = 10;
+float k = 1;
 float c = 0.5;
  
 float Theta_to_pos = 2*3.141592653;
 //Vector3f GR {{.10,0.22,10}};
 Vector3f GR {{0.1,0.1,0.1}};
  
-
 void setup() {
   // ODrive uses 115200 baud
   odrive_serial.begin(115200);
@@ -244,15 +267,17 @@ void loop() {
 
     Vector<float, 6> wall = wall_vec();
 
-    Vector<float, 3> norm = normal_dist(ee_3);
+    Vector<float,1> norm = normal_dist(ee_3);
+
+    float dist = norm(0);
 
     Vector<float, 4> velocity = vel_ee( ee_1, ee_2);
     Vector<float, 3> acceleration = accel_ee( ee_1,  ee_2, ee_3);
 
-    Vector<float, 3> Forces = k*norm -(c*velocity.head(3));
+    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* (velocity.head(3)).dot(wall.head(3))*wall.head(3));
 
     
-    Vector<float, 3> Tau = jacobian_torque( trig_matrix,  a, Forces, GR);
+    Vector<float, 3> Tau = whiteboard(GR,  k,  c,  a,  Theta_to_pos, wall, motor_pos);//jacobian_torque( trig_matrix,  a, Forces, GR);
 
     
     
@@ -287,9 +312,7 @@ void loop() {
     */
    
     Serial.println("Norm: ");
-    Serial << norm(0)<< '\n';
-    Serial << norm(1)<< '\n';
-    Serial << norm(2)<< '\n';
+    Serial << dist << '\n';
 
     /*
     Serial.println("velocity: ");
