@@ -206,9 +206,12 @@ float v_2;
 Vector<float, 4> ee_1;
 Vector<float, 4> ee_2;
 
-float a = 0.4767;
+float a = 0.45;
 float k = 1;
 float c = 0.5;
+
+int calibrated0 = 0;
+int calibrated1 = 0;
  
 float Theta_to_pos = 2*3.141592653;
 //Vector3f GR {{.10,0.22,10}};
@@ -223,6 +226,18 @@ void setup() {
   while (!Serial) ; // wait for Arduino Serial Monitor to open
 
   Serial.println("ODriveArduino");
+  Serial.println("Setting parameters...");
+
+  for (int axis = 0; axis < 1; ++axis) {
+    odrive_serial << "w axis" << axis << ".controller.config.vel_limit " << 5.f << '\n';
+    odrive_serial << "w axis" << axis << ".motor.config.current_lim " << 10.f << '\n';
+    odrive_serial << "w axis" << axis << ".motor.config.torque_lim " << 1.f << '\n';
+    // This ends up writing something like "w axis0.motor.config.current_lim 10.0\n"
+  }
+
+  Serial.println("Ready!");
+  Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
+
 
   // Set Torque to 0
   float t_0 = 0.0;
@@ -233,6 +248,10 @@ void setup() {
   int control_mode = CONTROL_MODE_TORQUE_CONTROL;
   odrive_serial << "w axis" << m_0 << ".controller.config.control_mode " << control_mode << '\n';
   odrive_serial << "w axis" << m_1 << ".controller.config.control_mode " << control_mode << '\n';
+
+
+  odrive_serial << "w axis" << m_0 << ".encoder.config.control_mode " << 0.0 << '\n';
+  odrive_serial << "w axis" << m_1 << ".encoder.config.control_mode " << 0.0 << '\n';
 
   // Set up closed loop control
   int requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
@@ -245,11 +264,49 @@ void setup() {
   Vector<float, 4> motor_pos {{0,0,0,time/1000}};
   Vector<float, 4> ee_1 = ee_pos(trig_func(GR, Theta_to_pos,motor_pos), a);
   Vector<float, 4> ee_2 = ee_pos(trig_func(GR, Theta_to_pos,motor_pos), a);
-    
+
+ 
 }
 
 void loop() {
-  while (true) {
+
+  if (Serial.available()) {
+    char c = Serial.read();
+    
+
+    // Run calibration sequence
+    if ((c == '0' || c == '1') && (calibrated0!=1 && calibrated1!=1) ){
+      int motornum = c-'0';
+      int requested_state;
+
+      
+      
+      requested_state = AXIS_STATE_MOTOR_CALIBRATION;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, true);
+
+     
+      requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, true);
+      
+      requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, true);
+
+      requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, false); // don't wait
+
+      if(c==0){
+        calibrated0 = 1;
+      }
+
+      if(c==1){
+        calibrated1 = 1;
+      }
+    }
+  while (calibrated0== 1 && calibrated1 == 1) {
     
     p_0 = odrive.GetPosition(m_0);
     // v_0 = odrive.GetVelocity(m_0);
@@ -279,19 +336,40 @@ void loop() {
     
     Vector<float, 3> Tau = whiteboard(GR,  k,  c,  a,  Theta_to_pos, wall, motor_pos);//jacobian_torque( trig_matrix,  a, Forces, GR);
 
+    //  52.5 mNm/A
+
+    float conv = 52.5/1000;
     
+
+    Vector<float, 3> Amps = Tau/conv;
+
+    //odrive.SetCurrent(m_0, Amps(0));
+    //odrive.SetCurrent(m_1, Amps(1));
+
+    Serial.println("amps: ");
+    Serial << Amps(0) << '\n';
+    Serial << Amps(1) << '\n';
     
+
+  
+
+    
+    /*
 
     Serial.println("Pos: ");
     Serial << p_0 << '\n';
     Serial << p_1 << '\n';
     
-    /*
+
+    
+   
     Serial.println("e-e position: ");
     Serial << ee_3(0) << '\n';
     Serial << ee_3(1) << '\n';
     Serial << ee_3(2) << '\n';
+
     */
+   
     
 
     Serial.println("e-e position (inches): ");
@@ -299,8 +377,8 @@ void loop() {
     Serial << 39.37*ee_3(1) << '\n';
     Serial << 39.37*ee_3(2) << '\n';
 
-    /*
-
+    
+  /*
      Serial.println("wall: ");
     Serial << wall(0)<< '\n';
     Serial << wall(1)<< '\n';
@@ -308,8 +386,9 @@ void loop() {
     Serial << wall(3)<< '\n';
     Serial << wall(4)<< '\n';
     Serial << wall(5)<< '\n';
+   */
 
-    */
+    
    
     Serial.println("Norm: ");
     Serial << dist << '\n';
@@ -328,8 +407,8 @@ void loop() {
     Serial << acceleration(0)<< '\n';
     Serial << acceleration(1)<< '\n';
     Serial << acceleration(2)<< '\n';
-
     */
+    
     
     Serial.println("Torques: ");
     Serial << Tau(0)<< '\n';
@@ -359,7 +438,7 @@ void loop() {
 
     
     
-    
+  }
   }
   
 }
