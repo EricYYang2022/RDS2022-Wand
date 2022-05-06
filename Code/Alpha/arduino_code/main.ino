@@ -19,9 +19,13 @@ HardwareSerial& odrive_serial = Serial1;
 
 ODriveArduino odrive(odrive_serial);
 
+HardwareSerial& odrive_serial1 = Serial2;
+ODriveArduino odrive1(odrive_serial1);
+
 // setup motor axis constant
 int m_0 = 0;
 int m_1 = 1;
+int m_2 = 0;
 
 using namespace Eigen;
 using Eigen::MatrixXf;
@@ -48,9 +52,14 @@ Vector<float, 4> pull(){
 //frame correction: 
 Vector<float, 6> wall_vec(){
     // hard code wall - otherwise, given from UNITY
-   Matrix4f Tsp {{0.,0.,1.,0.},{1.,0.,0.,.4},{0.,1.,0.,0.},{0.,0,0.,1.}};
+
+   float ds = 0.4;
+   float distance= 0.3; //change back to 0.5 m
+   
+   float dsw= ds+distance;
+   Matrix4f Tsp {{0.,0.,1.,0.},{1.,0.,0.,ds},{0.,1.,0.,0.},{0.,0,0.,1.}};
    Matrix4f Tpb {{1.,0.,0.,0.},{0.,1.,0.,0.},{0.,0.,1.,0.},{0.,0.,0.,1.}};
-   Matrix4f Tsw {{1.,0.,0.,0.},{0.,-1.,0.,1.1},{0.,0.,1.,0.},{0.,0,0.,1.}};
+   Matrix4f Tsw {{1.,0.,0.,0.},{0.,-1.,0.,dsw},{0.,0.,1.,0.},{0.,0,0.,1.}};
    Matrix4f Tsb = Tsp*Tpb;
    Matrix4f Tbw = Tsb.inverse()*Tsw;
    Vector<float, 6> wall {{Tbw(0,1), Tbw(1,1), Tbw(2,1), Tbw(0,3), Tbw(1,3),Tbw(2,3)}};
@@ -65,7 +74,7 @@ Vector<float, 4> theta_conv(Vector3f GR, float Theta_to_pos, Vector<float, 4> mo
    
     //correction for homing + math
     // homing adjustment:
-    float mp1 = 1*motor_pos(0) +1.45;
+    float mp1 = 1*motor_pos(0) +1.25;
     float mp2 = 1*motor_pos(1) +2.5;
     float mp3 = motor_pos(2) +0;
     
@@ -182,15 +191,26 @@ Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, floa
     Vector<float, 4> ee2 = ee_pos(trig_mat2, a);
     Vector<float, 1> norm = normal_dist(ee2);
     float dist = norm(0);
-    Vector<float, 4> velocity = vel_ee(ee1, ee2);
-    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* (velocity.head(3)).dot(wall.head(3))*wall.head(3));
+    
+    Vector<float, 4> nee1 = (ee1.head(3).dot(wall.head(3)))*wall.head(4);
+    Vector<float, 4> nee2 = (ee2.head(3).dot(wall.head(3)))*wall.head(4);
+    
+    nee1(3) = ee1(3);
+    nee2(3) = ee2(3);
+    
+    Vector<float, 4> nvelocity = vel_ee(nee1, nee2);
+
+    //Vector<float, 4> velocity = vel_ee(ee1, ee2);
+    
+    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
     Vector<float, 3> motor_torque =  jacobian_torque(trig_mat2, a, Forces, GR);
     Vector<float, 3> Zero_T {{0,0,0}};
-    if( dist >0){
+    if( dist >0.0005){
       return(motor_torque);
     }
     else{
       return(Zero_T);
+      
     }
 }
 
@@ -202,13 +222,14 @@ float p_1;
 float v_1;
 float p_2;
 float v_2;
+char c_motor;
 
 Vector<float, 4> ee_1;
 Vector<float, 4> ee_2;
 
 float a = 0.45;
-float k = 1;
-float c = 0.5;
+float c = 0;
+float k = 20;
 
 int calibrated0 = 0;
 int calibrated1 = 0;
@@ -220,6 +241,7 @@ Vector3f GR {{0.1,0.1,0.1}};
 void setup() {
   // ODrive uses 115200 baud
   odrive_serial.begin(115200);
+  odrive_serial1.begin(115200);
 
   // Serial to PC
   Serial.begin(115200);
@@ -228,12 +250,16 @@ void setup() {
   Serial.println("ODriveArduino");
   Serial.println("Setting parameters...");
 
+/*
   for (int axis = 0; axis < 1; ++axis) {
     odrive_serial << "w axis" << axis << ".controller.config.vel_limit " << 5.f << '\n';
     odrive_serial << "w axis" << axis << ".motor.config.current_lim " << 10.f << '\n';
     odrive_serial << "w axis" << axis << ".motor.config.torque_lim " << 1.f << '\n';
+    odrive_serial << "w axis" << axis << ".encoder.set_linear_count " << 0.f << '\n';
+    //odrive_serial << "w axis" << axis << ".motor.config " << 0.f << '\n';
     // This ends up writing something like "w axis0.motor.config.current_lim 10.0\n"
   }
+  */
 
   Serial.println("Ready!");
   Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
@@ -241,8 +267,10 @@ void setup() {
 
   // Set Torque to 0
   float t_0 = 0.0;
-  odrive.SetCurrent(m_0, t_0);
-  odrive.SetCurrent(m_1, t_0);
+ // odrive.SetCurrent(m_0, t_0);
+  //odrive.SetCurrent(m_1, t_0);
+
+  /*
   
   // Set Torque Control
   int control_mode = CONTROL_MODE_TORQUE_CONTROL;
@@ -257,6 +285,8 @@ void setup() {
   int requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
   odrive_serial << "w axis" << m_0 << ".requested_state " << requested_state << '\n';
   odrive_serial << "w axis" << m_1 << ".requested_state " << requested_state << '\n';
+  */
+  
 
   
   float time = millis();
@@ -265,58 +295,164 @@ void setup() {
   Vector<float, 4> ee_1 = ee_pos(trig_func(GR, Theta_to_pos,motor_pos), a);
   Vector<float, 4> ee_2 = ee_pos(trig_func(GR, Theta_to_pos,motor_pos), a);
 
- 
-}
 
-void loop() {
-
-  if (Serial.available()) {
-    char c = Serial.read();
+   while( !Serial.available()) {
+   }
+   
+    c_motor = Serial.read();
     
 
     // Run calibration sequence
-    if ((c == '0' || c == '1') && (calibrated0!=1 && calibrated1!=1) ){
-      int motornum = c-'0';
-      int requested_state;
+    
+      int motornum = c_motor-'0';
+  
 
-      
+      /*
       
       requested_state = AXIS_STATE_MOTOR_CALIBRATION;
-      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      Serial << "Axis" <<'0' << ": Requesting state " << requested_state << '\n';
       odrive.run_state(motornum, requested_state, true);
+
+      
+
+      delay(2500);
+
+*/
+
+
+      //set encoders to 0
+      odrive_serial << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+      odrive_serial << "w axis" << '1' << ".encoder.set_linear_count " << 0.f << '\n';
+      odrive_serial1 << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+     
+      int requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
+      Serial << "Axis" << '0' << ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, true);
+
+      delay(2500);
+
+      /*
+      requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION;
+      Serial << "Axis" << '0' << ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, true);
+      delay(2500);
+
+      */
+
+      requested_state = CONTROL_MODE_TORQUE_CONTROL;
+      Serial << "Axis" << '0'<< ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, false);
+      
+      
+      delay(2500);
+
+      requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
+      Serial << "Axis" << '0'<< ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, false); // don't wait
+      delay(2500);
+
+      
+
+      
+
+
+      c_motor = '1';
+      motornum = c_motor-'0';
+
+    /*
+
+      requested_state = AXIS_STATE_MOTOR_CALIBRATION;
+      Serial << "Axis" << '1'<< ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, true);
+
+      
+
+      delay(2500);
+      */
 
      
       requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
-      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      Serial << "Axis" << '1' << ": Requesting state " << requested_state << '\n';
       odrive.run_state(motornum, requested_state, true);
+
+      delay(2500);
+
+      /*
       
       requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION;
-      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      Serial << "Axis" << '1' << ": Requesting state " << requested_state << '\n';
       odrive.run_state(motornum, requested_state, true);
+      delay(2500);
+      */
+
+      requested_state = CONTROL_MODE_TORQUE_CONTROL;
+      Serial << "Axis" << '1'<< ": Requesting state " << requested_state << '\n';
+      odrive.run_state(motornum, requested_state, false);
+      delay(2500);
+
+
 
       requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
-      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      Serial << "Axis" << '1' << ": Requesting state " << requested_state << '\n';
       odrive.run_state(motornum, requested_state, false); // don't wait
+      delay(2500);
 
-      if(c==0){
-        calibrated0 = 1;
-      }
+     
+      
 
-      if(c==1){
-        calibrated1 = 1;
-      }
-    }
-  while (calibrated0== 1 && calibrated1 == 1) {
+      delay(2500);
+
+
+      c_motor = '0';
+      motornum = c_motor-'0';
+      
+      requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
+      Serial << "Axis" << '0' << ": Requesting state " << requested_state << '\n';
+      odrive1.run_state(motornum, requested_state, true);
+
+      delay(2500);
+
+      /*
+      requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION;
+      Serial << "Axis" << '0' << ": Requesting state " << requested_state << '\n';
+      odrive1.run_state(motornum, requested_state, true);
+      delay(2500);
+      */
+
+      requested_state = CONTROL_MODE_TORQUE_CONTROL;
+      Serial << "Axis" << '0'<< ": Requesting state " << requested_state << '\n';
+      odrive1.run_state(motornum, requested_state, false);
+      
+      
+      delay(2500);
+
+      requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
+      Serial << "Axis" << '0'<< ": Requesting state " << requested_state << '\n';
+      odrive1.run_state(motornum, requested_state, false); // don't wait
+      delay(2500);
+
+       odrive_serial1 << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+
+
+
+      
     
+ 
+}
+
+
+void loop() {
+  
+   
     p_0 = odrive.GetPosition(m_0);
     // v_0 = odrive.GetVelocity(m_0);
     p_1 = odrive.GetPosition(m_1);
     // v_1 = odrive.GetVelocity(m_0);
-    // p_2 = odrive.GetPosition(m_0);
+    p_2 = odrive1.GetPosition(m_2);
     // v_2 = odrive.GetVelocity(m_0);
     float time = millis();
     
-    Vector<float, 4> motor_pos {{p_0,p_1,0,time/1000}};
+    Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
   
     VectorXf trig_matrix = trig_func(GR, Theta_to_pos,motor_pos);
  
@@ -329,12 +465,19 @@ void loop() {
     float dist = norm(0);
 
     Vector<float, 4> velocity = vel_ee( ee_1, ee_2);
-    Vector<float, 3> acceleration = accel_ee( ee_1,  ee_2, ee_3);
 
-    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* (velocity.head(3)).dot(wall.head(3))*wall.head(3));
+    Vector<float, 4> nee1 = (ee_1.head(3).dot(wall.head(3)))*wall.head(4);
+    Vector<float, 4> nee2 = (ee_2.head(3).dot(wall.head(3)))*wall.head(4);
+    
+    nee1(3) = ee_1(3);
+    nee2(3) = ee_2(3);
+    
+    Vector<float, 4> nvelocity = vel_ee(nee1, nee2);
 
+    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
     
     Vector<float, 3> Tau = whiteboard(GR,  k,  c,  a,  Theta_to_pos, wall, motor_pos);//jacobian_torque( trig_matrix,  a, Forces, GR);
+    
 
     //  52.5 mNm/A
 
@@ -343,13 +486,19 @@ void loop() {
 
     Vector<float, 3> Amps = Tau/conv;
 
-    //odrive.SetCurrent(m_0, Amps(0));
-    //odrive.SetCurrent(m_1, Amps(1));
-
-    Serial.println("amps: ");
-    Serial << Amps(0) << '\n';
-    Serial << Amps(1) << '\n';
     
+    //Serial.println("SENDING TORQUE: ");
+    odrive.SetCurrent(0, Tau(0));
+    odrive.SetCurrent(1, Tau(1));
+    odrive1.SetCurrent(0, Tau(2));
+    //odrive1.SetCurrent(0, Tau(2));
+    
+
+    delay(75);
+
+  
+
+   
 
   
 
@@ -359,10 +508,12 @@ void loop() {
     Serial.println("Pos: ");
     Serial << p_0 << '\n';
     Serial << p_1 << '\n';
+    //Serial << p_2 << '\n';
+    */
     
 
-    
-   
+    /*
+  
     Serial.println("e-e position: ");
     Serial << ee_3(0) << '\n';
     Serial << ee_3(1) << '\n';
@@ -386,12 +537,14 @@ void loop() {
     Serial << wall(3)<< '\n';
     Serial << wall(4)<< '\n';
     Serial << wall(5)<< '\n';
-   */
 
+    */
     
    
     Serial.println("Norm: ");
     Serial << dist << '\n';
+    
+    
 
     /*
     Serial.println("velocity: ");
@@ -409,20 +562,31 @@ void loop() {
     Serial << acceleration(2)<< '\n';
     */
     
-    
+    /*
     Serial.println("Torques: ");
     Serial << Tau(0)<< '\n';
     Serial << Tau(1)<< '\n';
     Serial << Tau(2)<< '\n';
-    
-    
 
+
+    
+    Serial.println("Amps: ");
+    Serial << Amps(0)<< '\n';
+    Serial << Amps(1)<< '\n';
+    Serial << Amps(2)<< '\n';
+   
+   
+    
+    
+*/
     Serial.println("Force: ");
     //Serial << typeid(Forces(0)).name()<< '\n';
     Serial << Forces(0)<< '\n';
     Serial << Forces(1)<< '\n';
     Serial << Forces(2)<< '\n';
-    
+ 
+
+   
     
   
 
@@ -438,7 +602,6 @@ void loop() {
 
     
     
-  }
-  }
   
-}
+ }
+  
