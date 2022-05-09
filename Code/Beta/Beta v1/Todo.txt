@@ -1,0 +1,5 @@
+To Do:::
+1. Port over functions from the main arduino .ino file to header files to be imported
+2. Create new function for motor callibration to be called, here we can comment out stuff we dont want to callibrate
+3. Create a final python file for configuration and callibration
+4. Have everything called internally within the whiteboard demo, s.t. we can just call whiteboard()
