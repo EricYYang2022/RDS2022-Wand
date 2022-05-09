@@ -37,7 +37,7 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, float a, Vector<float, 3>
 
 // Below should be public
 Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, float theta_to_pos, Vector<float, 6> wall, Vector<float, 4> motor_pos);
-Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos);
+// Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos, Vector<float, 4> motor_pos);
 
 
 #endif //RDS_WAND_H

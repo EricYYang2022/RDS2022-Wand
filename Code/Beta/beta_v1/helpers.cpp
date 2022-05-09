@@ -183,11 +183,11 @@ Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, floa
 
     
 }
-
-Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos){
-    Vector<float,7> trig_mat1 = trig_func(GR,theta_to_pos);
-    Vector<float,7> trig_mat2 = trig_func(GR,theta_to_pos);
-    Vector<float,7> trig_mat3 = trig_func(GR,theta_to_pos);
+/*
+Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos, Vector<float, 4> motor_pos){
+    Vector<float,7> trig_mat1 = trig_func(GR,theta_to_pos, motor_pos);
+    Vector<float,7> trig_mat2 = trig_func(GR,theta_to_pos, motor_pos);
+    Vector<float,7> trig_mat3 = trig_func(GR,theta_to_pos, motor_pos);
 
     Vector<float, 4> ee1 = ee_pos(trig_mat1, a);
     Vector<float, 4> ee2 = ee_pos(trig_mat2, a);
@@ -201,5 +201,4 @@ Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_p
     Vector<float, 3> motor_torque =  jacobian_torque(trig_mat3, a, F, GR);
     return(motor_torque);
 }
-
-  
+*/
