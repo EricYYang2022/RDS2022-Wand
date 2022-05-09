@@ -1,5 +1,5 @@
 // includes
-#include <helpers.h>
+#include <rds_helper.h>
 
 
 using namespace Eigen;
@@ -183,6 +183,7 @@ Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, floa
 
     
 }
+
 /*
 Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos, Vector<float, 4> motor_pos){
     Vector<float,7> trig_mat1 = trig_func(GR,theta_to_pos, motor_pos);
