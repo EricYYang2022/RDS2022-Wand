@@ -7,17 +7,17 @@ def configure_motor_settings(m):
     """
     Function that allows for the configuration of motors based on various parameters
     :param m: ODRIVE Motor (odrv0)
-    :return: Configured motors according to Maxon Motor
+    :return: Configured motors according to Maxxon Motor
     """
 
     # Current Limit:
-    m.axis1.motor.config.current_lim = 9.28
+    m.axis0.motor.config.current_lim = 9.28
     
     # Velocity Limit:
-    m.axis1.controller.config.vel_limit = 2.5
+    m.axis0.controller.config.vel_limit = 4.0
 
     # Calibration current
-    m.axis1.motor.config.calibration_current = 10
+    m.axis0.motor.config.calibration_current = 5
 
     # Brake Resistance:
     m.config.enable_brake_resistor = False
@@ -26,29 +26,31 @@ def configure_motor_settings(m):
     m.config.dc_max_negative_current = -0.04
 
     # Pole Pairs in motor
-    m.axis1.motor.config.pole_pairs = 7
+    m.axis0.motor.config.pole_pairs = 7
 
     # Torque Constant for the Motor (torque per motor amp)
-    m.axis1.motor.config.torque_constant = 0.0525
+    m.axis0.motor.config.torque_constant = 0.0525
 
     # Type of motor
-    m.axis1.motor.config.motor_type = MOTOR_TYPE_HIGH_CURRENT
+    m.axis0.motor.config.motor_type = MOTOR_TYPE_HIGH_CURRENT
 
     # Torque Constant for the Motor (torque per motor amp)
-    m.axis1.encoder.config.cpr = 8192
+    m.axis0.encoder.config.cpr = 8192
 
-    m.config_brake_resistance = 0.5
+    m.axis0.motor.config.phase_resistance = 0.2068
 
-    m.save_configuration()
+    m.config.brake_resistance = 2.0
+
+    m.axis1.encoder.config.mode = ENCODER_MODE_INCREMENTAL
 
 
 def calibrate_motor(m1):
     """
     Runs full motor calibration and sets pre-calibrated value to True
-    :param m1: Odrive.axis1
+    :param m1: Odrive.axis0
     :return: Calibrated Motor
     """
-    m = m1.axis1
+    m = m1.axis0
     m.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
     print("Starting Full Motor Calibration")
     time.sleep(20)
@@ -59,10 +61,10 @@ def calibrate_motor(m1):
 def calibrate_encoder(m1):
     """
     Runs full encoder calibration and sets pre-calibrated value to True
-    :param m1: odrive.axis1
+    :param m1: odrive.axis0
     :return: Calibrated encoder
     """
-    m = m1.axis1
+    m = m1.axis0
     print("Starting Encoder Calibration")
     m.encoder.config.use_index = True
     m.requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH
@@ -87,7 +89,7 @@ def Odrive_UART_setup(m):
     m.config.uart_a_baudrate = 115200
     m.config.uart0_protocol = STREAM_PROTOCOL_TYPE_FIBRE
     m.save_configuration()
-    m.reboot()
+    # m.reboot()
 
 
 def main():
