@@ -37,7 +37,6 @@ float k = 20;
 int calibrated0 = 0;
 int calibrated1 = 0;
  
-float Theta_to_pos = 2*3.141592653;
 //Vector3f GR {{.10,0.22,10}};
 Vector3f GR {{0.1,0.1,0.1}};
 
@@ -153,48 +152,12 @@ void loop() {
     float time = millis();
     
     Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
-    VectorXf trig_matrix = trig_func(GR, Theta_to_pos, motor_pos);
-    Vector<float, 4> ee_3 = ee_pos(trig_matrix, a);
-    Vector<float, 6> wall = wall_vec();
-    
-    // Vector<float,1> norm = normal_dist(ee_3);
-    // float dist = norm(0);
-    // Vector<float, 4> velocity = vel_ee(ee_1, ee_2);
-    
-    Vector<float, 4> nee1 = (ee_1.head(3).dot(wall.head(3)))*wall.head(4);
-    Vector<float, 4> nee2 = (ee_2.head(3).dot(wall.head(3)))*wall.head(4);
-    nee1(3) = ee_1(3);
-    nee2(3) = ee_2(3);
-    
-    // Vector<float, 4> nvelocity = vel_ee(nee1, nee2);
-    // Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
-    
-    Vector<float, 3> Tau = whiteboard(GR,  k,  c,  a,  Theta_to_pos, wall, motor_pos); //jacobian_torque( trig_matrix,  a, Forces, GR);
+    Vector<float, 3> Tau = whiteboard(motor_pos, GR,  k,  c,  a); //jacobian_torque( trig_matrix,  a, Forces, GR);
     
     // Send Torque commands to motors
     odrive.SetCurrent(0, Tau(0));
     odrive.SetCurrent(1, Tau(1));
     odrive1.SetCurrent(0, Tau(2));
-
-    /*
-    Serial.println("e-e position (inches): ");
-    Serial << 39.37*ee_3(0) << '\n';
-    Serial << 39.37*ee_3(1) << '\n';
-    Serial << 39.37*ee_3(2) << '\n';
-    
-    Serial.println("Norm: ");
-    Serial << dist << '\n';
-    
-    Serial.println("Force: ");
-    //Serial << typeid(Forces(0)).name()<< '\n';
-    Serial << Forces(0)<< '\n';
-    Serial << Forces(1)<< '\n';
-    Serial << Forces(2)<< '\n';
-    */
-    
-    // I dont know what this is?
-    ee_1 = ee_2;
-    ee_2 = ee_3;
 
     Serial << "Time: " << (millis() - start_time);
  }

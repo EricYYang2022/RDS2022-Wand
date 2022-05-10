@@ -350,8 +350,6 @@ void loop() {
     nee1(3) = ee_1(3);
     nee2(3) = ee_2(3);
     
-    // Vector<float, 4> nvelocity = vel_ee(nee1, nee2);
-    // Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
     
     Vector<float, 3> Tau = whiteboard(GR,  k,  c,  a,  Theta_to_pos, wall, motor_pos); //jacobian_torque( trig_matrix,  a, Forces, GR);
     

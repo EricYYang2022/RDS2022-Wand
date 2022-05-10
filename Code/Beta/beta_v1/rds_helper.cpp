@@ -34,7 +34,7 @@ Vector<float, 6> wall_vec(){
 
 
 
-Vector<float, 4> theta_conv(Vector3f GR, float Theta_to_pos, Vector<float, 4> motor_pos){
+Vector<float, 4> theta_conv(Vector<float, 4> motor_pos, Vector3f GR, float Theta_to_pos = 2*3.141592653){
     //Vector<float, 4> motor_pos {{p_0,p_1,p_2,60}};
    
     //correction for homing + math
@@ -53,9 +53,9 @@ Vector<float, 4> theta_conv(Vector3f GR, float Theta_to_pos, Vector<float, 4> mo
 }
 
 
-Vector<float,7> trig_func(Vector3f GR, float Theta_to_pos, Vector<float, 4> motor_pos){
+Vector<float,7> trig_func(Vector<float, 4> motor_pos, Vector3f GR){
     float theta1, theta2, theta3, time, s1, s2, s3, c1, c2, c3 ;
-    Vector<float, 4> temp = theta_conv(GR, Theta_to_pos, motor_pos);
+    Vector<float, 4> temp = theta_conv(motor_pos, GR);
     theta1 = temp(0);
     theta2 = temp(1);
     theta3 = temp(2);
@@ -74,16 +74,15 @@ Vector<float,7> trig_func(Vector3f GR, float Theta_to_pos, Vector<float, 4> moto
 Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
     float x,y,z,t;
     
-     //   s1 = trig_matrix2[0,1];
-      //  s2 = trig_matrix2[0,1];
-       // s3 = trig_matrix2[0,2];
-       // c1 = trig_matrix2[1,0];
-        //c2 = trig_matrix2[1,1];
-        //c3 = trig_matrix2[1,2];
+    // s1 = trig_matrix2[0,1];
+    // s2 = trig_matrix2[0,1];
+    // s3 = trig_matrix2[0,2];
+    // c1 = trig_matrix2[1,0];
+    // c2 = trig_matrix2[1,1];
+    // c3 = trig_matrix2[1,2];
     
     t = trig_mat(6);
     
-   
     x = a*trig_mat(5)*(trig_mat(3)- trig_mat(4));  
     y = a*(trig_mat(0) - trig_mat(1));
     z = a*trig_mat(2)*(trig_mat(0)- trig_mat(1));
@@ -93,7 +92,7 @@ Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
 }
 
  
- Vector<float,1> normal_dist( Vector<float, 4>  e_e){
+ Vector<float,1> normal_dist(Vector<float, 4>  e_e){
     float px,py,pz,nx,ny,nz;
     VectorXf temp = wall_vec ();
    
@@ -105,14 +104,14 @@ Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
 
 }
 
-Vector<float, 4> vel_ee( Vector<float, 4> e_e1,  Vector<float, 4> e_e2){
+Vector<float, 4> vel_ee(Vector<float, 4> e_e1,  Vector<float, 4> e_e2){
     float dt = e_e2(3)- e_e1(3);
     Vector<float, 4> temp  = (e_e2 - e_e1)/dt;
     Vector<float, 4> velocity {{temp(0), temp(1), temp(2), dt}};
     return velocity;
 }
 
-Vector<float, 3> accel_ee( Vector<float, 4> e_e1,  Vector<float, 4> e_e2,  Vector<float, 4> e_e3){ 
+Vector<float, 3> accel_ee(Vector<float, 4> e_e1, Vector<float, 4> e_e2, Vector<float, 4> e_e3){ 
     
     Vector<float, 4> v1= vel_ee(e_e1, e_e2);
     Vector<float, 4> v2= vel_ee(e_e2, e_e3);
@@ -125,7 +124,7 @@ Vector<float, 3> accel_ee( Vector<float, 4> e_e1,  Vector<float, 4> e_e2,  Vecto
 }
 
 
-Vector<float, 3> jacobian_torque(VectorXf trig_matrix, float a, Vector<float, 3> F,Vector<float, 3> GR){
+Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F, Vector<float, 3> GR, float a){
     // Vector<float,7> trig_matrix {{s1, s2, s3, c1,c2,c3, time}};
     float J11,J12,J13,J21,J22,J23,J31,J32,J33;
     J11 = -a*trig_matrix(0)* trig_matrix(5);
@@ -146,10 +145,12 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, float a, Vector<float, 3>
 }
 
 
-Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, float theta_to_pos, Vector<float, 6> wall, Vector<float, 4> motor_pos){
+Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, float k = 20, float c = 0, float a = 0.45){
 
-    Vector<float,7> trig_mat1 = trig_func(GR,theta_to_pos, motor_pos);
-    Vector<float,7> trig_mat2 = trig_func(GR,theta_to_pos,motor_pos);
+    Vector<float, 6> wall = wall_vec();
+
+    Vector<float,7> trig_mat1 = trig_func(motor_pos, GR);
+    Vector<float,7> trig_mat2 = trig_func(motor_pos, GR);
     
     //trig_mat2(6) = 70;// only here for testing, trig-mat should be different
 
