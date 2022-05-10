@@ -14,8 +14,6 @@ using Eigen:: Matrix;
 using Eigen:: Vector;
 
 
-
-
 //frame correction: 
 Vector<float, 6> wall_vec(){
     // hard code wall - otherwise, given from UNITY
@@ -149,6 +147,7 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, float a, Vector<float, 3>
 
 
 Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, float theta_to_pos, Vector<float, 6> wall, Vector<float, 4> motor_pos){
+
     Vector<float,7> trig_mat1 = trig_func(GR,theta_to_pos, motor_pos);
     Vector<float,7> trig_mat2 = trig_func(GR,theta_to_pos,motor_pos);
     
