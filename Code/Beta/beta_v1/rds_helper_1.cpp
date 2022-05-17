@@ -140,7 +140,7 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F, Vecto
 }
 
 
-Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> ee2, float k = 20, float c = 0, float a = 0.45){
+Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, float k = 20, float c = 0, float a = 0.45){
     
     Vector<float, 6> wall = wall_vec();
 
@@ -166,7 +166,7 @@ Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vec
     Vector<float, 3> motor_torque =  jacobian_torque(trig_mat1, Forces, GR, a);
     Vector<float, 3> Zero_T {{0,0,0}};
 
-    // ee2 = ee_pos(trig_mat1, a);
+    ee2 = ee_pos(trig_mat1, a);
     
     if( dist >0.0005){
       return(motor_torque);

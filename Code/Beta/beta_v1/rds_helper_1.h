@@ -30,7 +30,7 @@ Vector<float, 3> accel_ee( Vector<float, 4> e_e1,  Vector<float, 4> e_e2,  Vecto
 Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F,Vector<float, 3> GR, float a);
 Vector<float,7> trig_func(Vector<float, 4> motor_pos, Vector<float, 3> GR);
 Vector<float, 4> ee_pos(VectorXf trig_mat, float a);
-Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> ee2, float k, float c, float a);
+Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, float k, float c, float a);
 // Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos, Vector<float, 4> motor_pos);
 
 #endif //RDS_WAND_H
