@@ -1,0 +1,6 @@
+To Do:::
+1. Have everything called internally within the whiteboard / inertial demo, s.t. we can just call whiteboard()
+2. Create a final python file for configuration and callibration
+3. Create new function for motor callibration to be called, here we can comment out stuff we dont want to callibrate
+4. Figure out time of loop and quantify spring constant
+
