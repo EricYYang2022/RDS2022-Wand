@@ -114,12 +114,12 @@ void loop() {
     p_1 = odrive.GetPosition(m_1);
     p_2 = odrive1.GetPosition(m_2);
 
-    digitalWrite(33, pin_state);
-    pin_state  =! pin_state;
 
     Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
     // Vector<float, 3> Tau = whiteboard(motor_pos, GR, *ee2, k, c, a); 
-    
+
+    digitalWrite(33, pin_state);
+    pin_state  =! pin_state;
     // Send Torque commands to motors
     odrive.SetCurrent(0, 0.0);
     odrive.SetCurrent(1, 0.0);
