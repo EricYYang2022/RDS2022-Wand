@@ -31,7 +31,6 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F,Vector
 Vector<float,7> trig_func(Vector<float, 4> motor_pos, Vector<float, 3> GR);
 Vector<float, 4> ee_pos(VectorXf trig_mat, float a);
 Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, float k, float c, float a);
-// Vector<float, 3> inertia(Vector<float, 3> GR, float m, float a, float theta_to_pos, Vector<float, 4> motor_pos);
-Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, Vector<float, 4> &ee3, float a, float m, int button)
+Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, Vector<float, 4> &ee3, float a, float m, int button);
 
 #endif //RDS_WAND_H

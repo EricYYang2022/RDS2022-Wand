@@ -179,9 +179,8 @@ Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vec
 }
 
 
-Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, Vector<float, 4> &ee3, float a = 0.45, float m, int button){
+Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector<float, 4> &ee2, Vector<float, 4> &ee3, float m, int button, float a = 0.45){
     
-
     Vector<float,7> trig_mat1 = trig_func(motor_pos, GR);
     // Vector<float,7> trig_mat2 = trig_func(motor_pos, GR);
 
@@ -191,23 +190,19 @@ Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Vector
 
     Vector<float, 3> accel= accel_ee(ee1,ee2,ee3);
 
-    
+
     //This is based off the direction of gravity being in the -y direction in our base frame axis
     Vector<float, 3> F_g {{0,-9.81,0}};
     
-    Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
-
-    
-
-    Vector<float, 3> Forces = -1*(m*accel.head(3) - F_g.head(3))
+    Vector<float, 3> Forces = -1*(m*accel.head(3) - F_g.head(3));
     Vector<float, 3> motor_torque =  jacobian_torque(trig_mat1, Forces, GR, a);
     Vector<float, 3> Zero_T {{0,0,0}};
 
-    ee3 = ee2
+    ee3 = ee2;
     ee2 = ee_pos(trig_mat1, a);
     
     
-    if( button>.5){
+    if( button > .5){
       return(motor_torque);
     }
     else{

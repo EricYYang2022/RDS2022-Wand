@@ -16,23 +16,19 @@ ODriveArduino odrive1(odrive_serial1);
 
 
 void callibrate_encoder(ODriveArduino odrv_srl, int axis) {
-    Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
-    int c_motor = Serial.read();
+    Serial.println("Callibrating encoders");
     
-    if (c_motor == 1) {
-      int requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
-      Serial << "Axis" << axis << ": Requesting state " << requested_state << '\n';
-      odrv_srl.run_state(axis, requested_state, true);
-      delay(2500);
-  
-      requested_state = CONTROL_MODE_TORQUE_CONTROL;
-      Serial << "Axis" << axis << ": Requesting state " << requested_state << '\n';
-      odrv_srl.run_state(0, requested_state, false);
-  
-      requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
-      Serial << "Axis" << axis << ": Requesting state " << requested_state << '\n';
-      odrv_srl.run_state(0, requested_state, false); // don't wait
-    }
+    int requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
+    odrv_srl.run_state(axis, requested_state, true);
+    delay(2500);
+
+    requested_state = CONTROL_MODE_TORQUE_CONTROL;
+    odrv_srl.run_state(axis, requested_state, false);
+
+    requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
+    odrv_srl.run_state(axis, requested_state, false); // don't wait
+
+    return;
 }
 
 
@@ -70,9 +66,15 @@ Vector<float, 3> GR {{0.1,0.1,0.1}};
 Vector<float, 4>* ee2;
 Vector<float, 4>* ee3;
 
+float pin_state = 0;
+
 float time;
+
+int start = 1;
  
 void setup() {
+    pinMode(33, OUTPUT);
+    
     // ODrive uses 115200 baud
     odrive_serial.begin(115200);
     odrive_serial1.begin(115200);
@@ -82,12 +84,10 @@ void setup() {
     while (!Serial) ; // wait for Arduino Serial Monitor to open
 
     Serial.println("ODriveArduino");
-    Serial.println("Setting parameters...");
-
     Serial.println("Ready!");
 
     float time = millis();
-    
+
     Vector<float, 4> motor_pos {{0,0,0,time/1000}};
     
     // Run calibration sequence
@@ -101,24 +101,32 @@ void setup() {
     callibrate_encoder(odrive, 1);
     callibrate_encoder(odrive1, 0);
 
-    *ee3 = ee_pos(trig_func(motor_pos, GR), a);
-    *ee2 = ee_pos(trig_func(motor_pos, GR), a);
+    //*ee3 = ee_pos(trig_func(motor_pos, GR), a);
+    //*ee2 = ee_pos(trig_func(motor_pos, GR), a);
+
 }
 
 
 void loop() {
+    
     // Getting position data 
     p_0 = odrive.GetPosition(m_0);
     p_1 = odrive.GetPosition(m_1);
     p_2 = odrive1.GetPosition(m_2);
-    
+
+    digitalWrite(33, pin_state);
+    pin_state  =! pin_state;
+
     Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
-    Vector<float, 3> Tau = whiteboard(motor_pos, GR, *ee2, k, c, a); 
+    // Vector<float, 3> Tau = whiteboard(motor_pos, GR, *ee2, k, c, a); 
     
     // Send Torque commands to motors
-    odrive.SetCurrent(0, Tau(0));
-    odrive.SetCurrent(1, Tau(1));
-    odrive1.SetCurrent(0, Tau(2));
+    odrive.SetCurrent(0, 0.0);
+    odrive.SetCurrent(1, 0.0);
+    odrive1.SetCurrent(0, 0.0);
+
+    digitalWrite(33, pin_state);
+    pin_state  =! pin_state;
 
  }
   
