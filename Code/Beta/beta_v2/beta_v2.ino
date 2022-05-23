@@ -66,7 +66,7 @@ Vector<float, 3> GR {{0.1,0.1,0.1}};
 Vector<float, 4>* ee2;
 Vector<float, 4>* ee3;
 
-float pin_state = 0;
+float pin_state = 1;
 
 float time;
 
@@ -76,8 +76,8 @@ void setup() {
     pinMode(33, OUTPUT);
     
     // ODrive uses 115200 baud
-    odrive_serial.begin(115200);
-    odrive_serial1.begin(115200);
+    odrive_serial.begin(1000000);
+    odrive_serial1.begin(1000000);
 
     // Serial to PC
     Serial.begin(115200);
@@ -104,29 +104,29 @@ void setup() {
     //*ee3 = ee_pos(trig_func(motor_pos, GR), a);
     //*ee2 = ee_pos(trig_func(motor_pos, GR), a);
 
+    Serial.println("Start Loop!");
+
 }
 
 
-void loop() {
+void loop() {    
+    digitalWrite(33, pin_state);
+    pin_state  =! pin_state;
     
     // Getting position data 
     p_0 = odrive.GetPosition(m_0);
-    p_1 = odrive.GetPosition(m_1);
     p_2 = odrive1.GetPosition(m_2);
-
-
+    p_1 = odrive.GetPosition(m_1);
+   
     Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
     // Vector<float, 3> Tau = whiteboard(motor_pos, GR, *ee2, k, c, a); 
 
-    digitalWrite(33, pin_state);
-    pin_state  =! pin_state;
-    // Send Torque commands to motors
-    odrive.SetCurrent(0, 0.0);
-    odrive.SetCurrent(1, 0.0);
-    odrive1.SetCurrent(0, 0.0);
+    // Send Torque commands to motors, 1ms
 
-    digitalWrite(33, pin_state);
-    pin_state  =! pin_state;
+    odrive_serial << "c " << 0 << " " << 0.0 << "\n";
+    odrive_serial1 << "c " << 0 << " " << 0.0 << "\n";
+    odrive_serial << "c " << 1 << " " << 0.0 << "\n";
+    delayMicroseconds(50);
 
  }
   
