@@ -20,13 +20,17 @@ void callibrate_encoder(ODriveArduino odrv_srl, int axis) {
     
     int requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
     odrv_srl.run_state(axis, requested_state, true);
-    delay(2500);
-
+    delay(3000);
+    
     requested_state = CONTROL_MODE_TORQUE_CONTROL;
     odrv_srl.run_state(axis, requested_state, false);
-
+    
+    delay(100);
+    
     requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
     odrv_srl.run_state(axis, requested_state, false); // don't wait
+
+    delay(100);
 
     return;
 }
@@ -68,7 +72,7 @@ Vector<float, 4> ee3;
 
 float pin_state = 1;
 
-float time;
+float time = 0;
 
 int start = 1;
  
@@ -76,8 +80,8 @@ void setup() {
     pinMode(33, OUTPUT);
     
     // ODrive uses 115200 baud
-    odrive_serial.begin(1000000);
-    odrive_serial1.begin(1000000);
+    odrive_serial.begin(921600);
+    odrive_serial1.begin(921600);
 
     // Serial to PC
     Serial.begin(115200);
@@ -86,16 +90,22 @@ void setup() {
     Serial.println("ODriveArduino");
     Serial.println("Ready!");
 
-    float time = millis();
+    time = millis();
 
     Vector<float, 4> motor_pos {{0,0,0,time/1000}};
     
     // Run calibration sequence
 
     //set encoders to 0
+    Serial.println("Reading Home!");
     odrive_serial << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+    delay(50);
     odrive_serial << "w axis" << '1' << ".encoder.set_linear_count " << 0.f << '\n';
+    delay(50);
     odrive_serial1 << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+    delay(50);
+
+    delay(2500);
 
     callibrate_encoder(odrive, 0);
     callibrate_encoder(odrive, 1);
@@ -105,11 +115,16 @@ void setup() {
     ee2 = ee_pos(trig_func(motor_pos, GR), a);
 
     Serial.println("Start Loop!");
+    odrive_serial << "c " << 0 << " " << 0.0 << "\n";
+    delayMicroseconds(50);
+    odrive_serial << "c " << 1 << " " << 0.0 << "\n";
+    delayMicroseconds(50);
+    odrive_serial1 << "c " << 0 << " " << 0.0 << "\n";
 
 }
 
 
-void loop() {    
+void loop() {
     digitalWrite(33, pin_state);
     pin_state  =! pin_state;
     
@@ -117,16 +132,22 @@ void loop() {
     p_0 = odrive.GetPosition(m_0);
     p_2 = odrive1.GetPosition(m_2);
     p_1 = odrive.GetPosition(m_1);
-   
+
+    /*
+    time = 0.01;
     Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
-    Vector<float, 3> Tau = whiteboard(motor_pos, GR, ee2, k, c, a); 
-
+    //Vector<float, 3> Tau = whiteboard(motor_pos, GR, ee2, k, c, a); 
+    
+    Serial << "Tau 0: " << Tau(0) << "\n";
+    delayMicroseconds(50);
+    Serial << "Tau 1: " << Tau(1) << "\n";
+    delayMicroseconds(50);
+    Serial << "Tau 2: " << Tau(2) << "\n";
+    */
+    
     // Send Torque commands to motors, 1ms
-
     odrive_serial << "c " << 0 << " " << 0.0 << "\n";
     odrive_serial1 << "c " << 0 << " " << 0.0 << "\n";
     odrive_serial << "c " << 1 << " " << 0.0 << "\n";
-    delayMicroseconds(50);
-
  }
   

@@ -37,9 +37,9 @@ Vector<float, 4> theta_conv(Vector<float, 4> motor_pos, Vector<float, 3> GR, flo
    
     //correction for homing + math
     // homing adjustment:
-    float mp1 = 1*motor_pos(0) +0;
-    float mp2 = 1*motor_pos(1) +2.5;
-    float mp3 = motor_pos(2) +0;
+    float mp1 = 1*motor_pos(0) + 1.25;
+    float mp2 = 1*motor_pos(1) + 2.5;
+    float mp3 = motor_pos(2) - 0.783;
     
     Vector<float, 3> mp_vec {{mp1,mp2,mp3}};
 
@@ -82,7 +82,7 @@ Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
     
     x = a*trig_mat(5)*(trig_mat(3)- trig_mat(4));  
     y = a*(trig_mat(0) - trig_mat(1));
-    z = a*trig_mat(2)*(trig_mat(0)- trig_mat(1));
+    z = a*trig_mat(2)*(trig_mat(3)- trig_mat(4));
     Vector<float, 4> pos {{x,y,z,t}};
 
     return pos;
@@ -124,12 +124,12 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F, Vecto
     float J11,J12,J13,J21,J22,J23,J31,J32,J33;
     J11 = -a*trig_matrix(0)* trig_matrix(5);
     J12 = a*trig_matrix(1)* trig_matrix(5);
-    J13 = -a*trig_matrix(3)* trig_matrix(2) + a*trig_matrix(4)* trig_matrix(3);
+    J13 = -a*trig_matrix(3)* trig_matrix(2) + a*trig_matrix(4)* trig_matrix(2);
     J21 = a*trig_matrix(3);
     J22 = -a*trig_matrix(4);
     J23 = 0;
     J31 = -a*trig_matrix(0)* trig_matrix(2);
-    J32 = a*trig_matrix(1)* trig_matrix(5);
+    J32 = a*trig_matrix(1)* trig_matrix(2);
     J33 = a*trig_matrix(3)* trig_matrix(5) -a*trig_matrix(4)* trig_matrix(5);
 
     Matrix3f J {{J11,J21,J31},{J12,J22,J32},{J13,J23,J33}};
