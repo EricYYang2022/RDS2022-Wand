@@ -63,8 +63,8 @@ int calibrated1 = 0;
 //Vector3f GR {{.10,0.22,10}};
 Vector<float, 3> GR {{0.1,0.1,0.1}};
 
-Vector<float, 4>* ee2;
-Vector<float, 4>* ee3;
+Vector<float, 4> ee2;
+Vector<float, 4> ee3;
 
 float pin_state = 1;
 
@@ -101,8 +101,8 @@ void setup() {
     callibrate_encoder(odrive, 1);
     callibrate_encoder(odrive1, 0);
 
-    //*ee3 = ee_pos(trig_func(motor_pos, GR), a);
-    //*ee2 = ee_pos(trig_func(motor_pos, GR), a);
+    ee3 = ee_pos(trig_func(motor_pos, GR), a);
+    ee2 = ee_pos(trig_func(motor_pos, GR), a);
 
     Serial.println("Start Loop!");
 
@@ -119,7 +119,7 @@ void loop() {
     p_1 = odrive.GetPosition(m_1);
    
     Vector<float, 4> motor_pos {{p_0,p_1,p_2,time/1000}};
-    // Vector<float, 3> Tau = whiteboard(motor_pos, GR, *ee2, k, c, a); 
+    Vector<float, 3> Tau = whiteboard(motor_pos, GR, ee2, k, c, a); 
 
     // Send Torque commands to motors, 1ms
 
