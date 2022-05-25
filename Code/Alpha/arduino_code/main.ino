@@ -240,8 +240,8 @@ Vector3f GR {{0.1,0.1,0.1}};
  
 void setup() {
   // ODrive uses 115200 baud
-  odrive_serial.begin(115200);
-  odrive_serial1.begin(115200);
+  odrive_serial.begin(1000000);
+  odrive_serial1.begin(1000000);
 
   // Serial to PC
   Serial.begin(115200);
@@ -494,7 +494,7 @@ void loop() {
     //odrive1.SetCurrent(0, Tau(2));
     
 
-    delay(75);
+    delayMicroseconds(50);
 
   
 
@@ -519,7 +519,7 @@ void loop() {
     Serial << ee_3(1) << '\n';
     Serial << ee_3(2) << '\n';
 
-    */
+
    
     
 
@@ -529,7 +529,7 @@ void loop() {
     Serial << 39.37*ee_3(2) << '\n';
 
     
-  /*
+ 
      Serial.println("wall: ");
     Serial << wall(0)<< '\n';
     Serial << wall(1)<< '\n';
@@ -538,15 +538,12 @@ void loop() {
     Serial << wall(4)<< '\n';
     Serial << wall(5)<< '\n';
 
-    */
-    
    
     Serial.println("Norm: ");
     Serial << dist << '\n';
     
     
 
-    /*
     Serial.println("velocity: ");
     Serial << velocity(0)<< '\n';
     Serial << velocity(1)<< '\n';
@@ -578,7 +575,7 @@ void loop() {
    
     
     
-*/
+
     Serial.println("Force: ");
     //Serial << typeid(Forces(0)).name()<< '\n';
     Serial << Forces(0)<< '\n';
@@ -588,7 +585,7 @@ void loop() {
 
    
     
-  
+  */
 
     
 
