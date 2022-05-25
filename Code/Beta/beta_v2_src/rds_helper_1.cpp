@@ -140,7 +140,7 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F, Vecto
 }
 
 
-Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref<Vector<float, 4>>& ee2, float k = 20, float c = 0, float a = 0.45){
+Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref<Vector<float, 4>> ee2, float k = 20, float c = 0, float a = 0.45){
     
     Vector<float, 6> wall = wall_vec();
 
@@ -179,7 +179,7 @@ Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref
 }
 
 
-Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref<Vector<float, 4>>& ee2, Vector<float, 4> &ee3, float m, int button, float a = 0.45){
+Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref<Vector<float, 4>> ee2, Ref<Vector<float, 4>> ee3, float m, int button, float a = 0.45){
     
     Vector<float,7> trig_mat1 = trig_func(motor_pos, GR);
     // Vector<float,7> trig_mat2 = trig_func(motor_pos, GR);
