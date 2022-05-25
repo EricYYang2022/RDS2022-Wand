@@ -54,7 +54,7 @@ Vector<float, 6> wall_vec(){
     // hard code wall - otherwise, given from UNITY
 
    float ds = 0.4;
-   float distance= 0.3; //change back to 0.5 m
+   float distance= 0.5; //change back to 0.5 m
    
    float dsw= ds+distance;
    Matrix4f Tsp {{0.,0.,1.,0.},{1.,0.,0.,ds},{0.,1.,0.,0.},{0.,0,0.,1.}};
@@ -76,7 +76,7 @@ Vector<float, 4> theta_conv(Vector3f GR, float Theta_to_pos, Vector<float, 4> mo
     // homing adjustment:
     float mp1 = 1*motor_pos(0) +1.25;
     float mp2 = 1*motor_pos(1) +2.5;
-    float mp3 = motor_pos(2) +0;
+    float mp3 = motor_pos(2) -0.783;
     
     Vector<float, 3> mp_vec {{mp1,mp2,mp3}};
 
@@ -121,7 +121,7 @@ Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
    
     x = a*trig_mat(5)*(trig_mat(3)- trig_mat(4));  
     y = a*(trig_mat(0) - trig_mat(1));
-    z = a*trig_mat(2)*(trig_mat(0)- trig_mat(1));
+    z = a*trig_mat(2)*(trig_mat(3)- trig_mat(4));
     Vector<float, 4> pos {{x,y,z,t}};
 
     return pos;
@@ -174,7 +174,9 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, float a, Vector<float, 3>
     J33 = a*trig_matrix(3)* trig_matrix(5) -a*trig_matrix(4)* trig_matrix(5);
 
     Matrix3f J {{J11,J21,J31},{J12,J22,J32},{J13,J23,J33}};
-    Matrix3f inv = J.inverse();
+
+    //TIME CHECK
+    Matrix3f inv = J.inverse(); //MODIFY
     Vector<float, 3> Tau = inv *(F);
     Vector<float, 3> T_motor = GR.cwiseProduct(Tau);
     return (T_motor);
@@ -205,7 +207,7 @@ Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, floa
     Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
     Vector<float, 3> motor_torque =  jacobian_torque(trig_mat2, a, Forces, GR);
     Vector<float, 3> Zero_T {{0,0,0}};
-    if( dist >0.0005){
+    if( dist >0.00005){
       return(motor_torque);
     }
     else{
@@ -213,7 +215,7 @@ Vector<float, 3> whiteboard(Vector<float, 3> GR, float k, float c, float a, floa
       
     }
 }
-
+//fast
 
 //global variables:
 float p_0;
@@ -228,8 +230,11 @@ Vector<float, 4> ee_1;
 Vector<float, 4> ee_2;
 
 float a = 0.45;
-float c = 0;
-float k = 20;
+float c = 0.01;
+float k = 50.; 
+int i = 0;
+
+//SO k =10 = 1N @0.1m into wall. SO K UNITS ARE N/M!!!
 
 int calibrated0 = 0;
 int calibrated1 = 0;
@@ -240,8 +245,8 @@ Vector3f GR {{0.1,0.1,0.1}};
  
 void setup() {
   // ODrive uses 115200 baud
-  odrive_serial.begin(1000000);
-  odrive_serial1.begin(1000000);
+  odrive_serial.begin(115200);
+  odrive_serial1.begin(115200);
 
   // Serial to PC
   Serial.begin(115200);
@@ -324,6 +329,8 @@ void setup() {
       odrive_serial << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
       odrive_serial << "w axis" << '1' << ".encoder.set_linear_count " << 0.f << '\n';
       odrive_serial1 << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+      Serial.println("set\n");
+      
      
       int requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH;
       Serial << "Axis" << '0' << ": Requesting state " << requested_state << '\n';
@@ -421,7 +428,7 @@ void setup() {
 
       requested_state = CONTROL_MODE_TORQUE_CONTROL;
       Serial << "Axis" << '0'<< ": Requesting state " << requested_state << '\n';
-      odrive1.run_state(motornum, requested_state, false);
+      odrive1.run_state(motornum, requested_state, true);
       
       
       delay(2500);
@@ -431,7 +438,10 @@ void setup() {
       odrive1.run_state(motornum, requested_state, false); // don't wait
       delay(2500);
 
-       odrive_serial1 << "w axis" << '0' << ".encoder.set_linear_count " << 0.f << '\n';
+      Serial.println("DONE");
+   
+
+  
 
 
 
@@ -443,7 +453,7 @@ void setup() {
 
 void loop() {
   
-   
+   //CHECK
     p_0 = odrive.GetPosition(m_0);
     // v_0 = odrive.GetVelocity(m_0);
     p_1 = odrive.GetPosition(m_1);
@@ -459,12 +469,13 @@ void loop() {
     Vector<float, 4> ee_3 = ee_pos(trig_matrix, a);
 
     Vector<float, 6> wall = wall_vec();
-
+/*
     Vector<float,1> norm = normal_dist(ee_3);
 
     float dist = norm(0);
 
     Vector<float, 4> velocity = vel_ee( ee_1, ee_2);
+    */
 
     Vector<float, 4> nee1 = (ee_1.head(3).dot(wall.head(3)))*wall.head(4);
     Vector<float, 4> nee2 = (ee_2.head(3).dot(wall.head(3)))*wall.head(4);
@@ -488,13 +499,22 @@ void loop() {
 
     
     //Serial.println("SENDING TORQUE: ");
+    //CHECK
     odrive.SetCurrent(0, Tau(0));
     odrive.SetCurrent(1, Tau(1));
     odrive1.SetCurrent(0, Tau(2));
-    //odrive1.SetCurrent(0, Tau(2));
+   
+   //odrive1.SetCurrent(0, Tau(2));
+
+
+    /*
+    odrive.SetCurrent(0, 0);
+    odrive.SetCurrent(1, 0);
+    odrive1.SetCurrent(0, 0);
+    */
     
 
-    delayMicroseconds(50);
+    //delay(75);
 
   
 
@@ -519,17 +539,21 @@ void loop() {
     Serial << ee_3(1) << '\n';
     Serial << ee_3(2) << '\n';
 
-
-   
     
+   */
+    
+  
 
+  while (i<10){
     Serial.println("e-e position (inches): ");
     Serial << 39.37*ee_3(0) << '\n';
     Serial << 39.37*ee_3(1) << '\n';
     Serial << 39.37*ee_3(2) << '\n';
-
+    i+=1;
+  }
     
- 
+    /*
+  
      Serial.println("wall: ");
     Serial << wall(0)<< '\n';
     Serial << wall(1)<< '\n';
@@ -538,12 +562,16 @@ void loop() {
     Serial << wall(4)<< '\n';
     Serial << wall(5)<< '\n';
 
+    
+    
    
     Serial.println("Norm: ");
     Serial << dist << '\n';
+    */
     
     
 
+    /*
     Serial.println("velocity: ");
     Serial << velocity(0)<< '\n';
     Serial << velocity(1)<< '\n';
@@ -565,7 +593,6 @@ void loop() {
     Serial << Tau(1)<< '\n';
     Serial << Tau(2)<< '\n';
 
-
     
     Serial.println("Amps: ");
     Serial << Amps(0)<< '\n';
@@ -575,17 +602,16 @@ void loop() {
    
     
     
-
     Serial.println("Force: ");
     //Serial << typeid(Forces(0)).name()<< '\n';
     Serial << Forces(0)<< '\n';
     Serial << Forces(1)<< '\n';
     Serial << Forces(2)<< '\n';
- 
+ */
 
    
     
-  */
+  
 
     
 

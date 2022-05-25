@@ -9,9 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b900c8be-4eab-4e32-8653-da0252a0c579" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../testarduino.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../testarduino.ino" afterDir="false" />
-    </list>
+    <list default="true" id="b900c8be-4eab-4e32-8653-da0252a0c579" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +32,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="D:/UNI/Q6/CS_211/hw06/hw06" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -46,10 +45,17 @@
       <option name="presentableId" value="Default" />
       <updated>1649185772496</updated>
       <workItem from="1649185782208" duration="27000" />
+      <workItem from="1652842301105" duration="19000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="591" y="275" key="FileChooserDialogImpl" timestamp="1652842318848">
+      <screen x="0" y="0" width="1620" height="1040" />
+    </state>
+    <state x="591" y="275" key="FileChooserDialogImpl/0.0.1620.1040/3240.0.1920.1040@0.0.1620.1040" timestamp="1652842318848" />
   </component>
 </project>

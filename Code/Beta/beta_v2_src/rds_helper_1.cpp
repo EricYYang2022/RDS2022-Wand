@@ -1,5 +1,5 @@
 // includes
-#include <rds_helper.h>
+#include <rds_helper_1.h>
 
 
 using namespace Eigen;
@@ -32,9 +32,7 @@ Vector<float, 6> wall_vec(){
 }
 
 
-
-
-Vector<float, 4> theta_conv(Vector<float, 4> motor_pos, Vector3f GR, float Theta_to_pos = 2*3.141592653){
+Vector<float, 4> theta_conv(Vector<float, 4> motor_pos, Vector<float, 3> GR, float Theta_to_pos = 2*3.141592653){
     //Vector<float, 4> motor_pos {{p_0,p_1,p_2,60}};
    
     //correction for homing + math
@@ -45,7 +43,6 @@ Vector<float, 4> theta_conv(Vector<float, 4> motor_pos, Vector3f GR, float Theta
     
     Vector<float, 3> mp_vec {{mp1,mp2,mp3}};
 
-    
     Vector<float, 3> theta_1 =GR.cwiseProduct(Theta_to_pos*mp_vec);
     
     Vector<float, 4> theta_j(theta_1(0), theta_1(1), theta_1(2), motor_pos(3));
@@ -53,7 +50,7 @@ Vector<float, 4> theta_conv(Vector<float, 4> motor_pos, Vector3f GR, float Theta
 }
 
 
-Vector<float,7> trig_func(Vector<float, 4> motor_pos, Vector3f GR){
+Vector<float,7> trig_func(Vector<float, 4> motor_pos, Vector<float, 3> GR){
     float theta1, theta2, theta3, time, s1, s2, s3, c1, c2, c3 ;
     Vector<float, 4> temp = theta_conv(motor_pos, GR);
     theta1 = temp(0);
@@ -92,10 +89,8 @@ Vector<float, 4> ee_pos(VectorXf trig_mat, float a){
 }
 
  
- Vector<float,1> normal_dist(Vector<float, 4>  e_e){
-    float px,py,pz,nx,ny,nz;
-    VectorXf temp = wall_vec ();
-   
+ Vector<float,1> normal_dist(Vector<float, 4>  e_e, Vector<float, 6> temp){
+
     Vector<float, 3> norm {temp(0),temp(1),temp(2)};
     Vector<float, 3> point = {temp(3),temp(4),temp(5)};
     Vector<float, 3> point_vec = point-e_e.head(3);
@@ -113,8 +108,8 @@ Vector<float, 4> vel_ee(Vector<float, 4> e_e1,  Vector<float, 4> e_e2){
 
 Vector<float, 3> accel_ee(Vector<float, 4> e_e1, Vector<float, 4> e_e2, Vector<float, 4> e_e3){ 
     
-    Vector<float, 4> v1= vel_ee(e_e1, e_e2);
-    Vector<float, 4> v2= vel_ee(e_e2, e_e3);
+    Vector<float, 4> v1= vel_ee(e_e3, e_e2);
+    Vector<float, 4> v2= vel_ee(e_e2, e_e1);
     float dt1 = v1(3);
     float dt2 = v2(3);
     float dt_accel = dt2-dt1;
@@ -145,18 +140,16 @@ Vector<float, 3> jacobian_torque(VectorXf trig_matrix, Vector<float, 3> F, Vecto
 }
 
 
-Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, float k = 20, float c = 0, float a = 0.45){
-
+Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref<Vector<float, 4>> ee2, float k = 20, float c = 0, float a = 0.45){
+    
     Vector<float, 6> wall = wall_vec();
 
     Vector<float,7> trig_mat1 = trig_func(motor_pos, GR);
-    Vector<float,7> trig_mat2 = trig_func(motor_pos, GR);
-    
-    //trig_mat2(6) = 70;// only here for testing, trig-mat should be different
+    // Vector<float,7> trig_mat2 = trig_func(motor_pos, GR);
 
     Vector<float, 4> ee1 = ee_pos(trig_mat1, a);
-    Vector<float, 4> ee2 = ee_pos(trig_mat2, a);
-    Vector<float, 1> norm = normal_dist(ee2);
+    // Vector<float, 4> ee2 = ee_pos(trig_mat2, a);
+    Vector<float, 1> norm = normal_dist(ee2, wall);
     float dist = norm(0);
     
     Vector<float, 4> nee1 = (ee1.head(3).dot(wall.head(3)))*wall.head(4);
@@ -170,8 +163,11 @@ Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, flo
     //Vector<float, 4> velocity = vel_ee(ee1, ee2);
     
     Vector<float, 3> Forces = k*(dist * wall.head(3)) -(c* nvelocity.head(3));
-    Vector<float, 3> motor_torque =  jacobian_torque(trig_mat2, a, Forces, GR);
+    Vector<float, 3> motor_torque =  jacobian_torque(trig_mat1, Forces, GR, a);
     Vector<float, 3> Zero_T {{0,0,0}};
+
+    ee2 = ee_pos(trig_mat1, a);
+    
     if( dist >0.0005){
       return(motor_torque);
     }
@@ -179,8 +175,40 @@ Vector<float, 3> whiteboard(Vector<float, 4> motor_pos, Vector<float, 3> GR, flo
       return(Zero_T);
       
     }
+    
+}
 
 
+Vector<float, 3> interia(Vector<float, 4> motor_pos, Vector<float, 3> GR, Ref<Vector<float, 4>> ee2, Ref<Vector<float, 4>> ee3, float m, int button, float a = 0.45){
+    
+    Vector<float,7> trig_mat1 = trig_func(motor_pos, GR);
+    // Vector<float,7> trig_mat2 = trig_func(motor_pos, GR);
+
+    Vector<float, 4> ee1 = ee_pos(trig_mat1, a);
+    // Vector<float, 4> ee2 = ee_pos(trig_mat2, a);
+    
+
+    Vector<float, 3> accel= accel_ee(ee1,ee2,ee3);
+
+
+    //This is based off the direction of gravity being in the -y direction in our base frame axis
+    Vector<float, 3> F_g {{0,-9.81,0}};
+    
+    Vector<float, 3> Forces = -1*(m*accel.head(3) - F_g.head(3));
+    Vector<float, 3> motor_torque =  jacobian_torque(trig_mat1, Forces, GR, a);
+    Vector<float, 3> Zero_T {{0,0,0}};
+
+    ee3 = ee2;
+    ee2 = ee_pos(trig_mat1, a);
+    
+    
+    if( button > .5){
+      return(motor_torque);
+    }
+    else{
+      return(Zero_T);
+      
+    }
     
 }
 
