@@ -80,8 +80,8 @@ void setup() {
     pinMode(33, OUTPUT);
     
     // ODrive uses 115200 baud
-    odrive_serial.begin(921600);
-    odrive_serial1.begin(921600);
+    odrive_serial.begin(115200);
+    odrive_serial1.begin(115200);
 
     // Serial to PC
     Serial.begin(115200);
