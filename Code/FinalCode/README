@@ -1,5 +1,5 @@
 This is the final arduino files used to conduct the whiteboard demo, and the whiteboard demo with VR integration. 
-Prior to running these files, two libraries must be uploaded to your Arduino IDE. These files are stored beneath the "Library" folder in this directory. 
+Prior to running these files, two libraries must be uploaded to your Arduino IDE. These files are stored beneath the "Libraries" folder in this directory. 
 
 
 
