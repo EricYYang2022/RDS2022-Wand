@@ -1,0 +1,12 @@
+This is the final arduino files used to conduct the whiteboard demo, and the whiteboard demo with VR integration. 
+Prior to running these files, two libraries must be uploaded to your Arduino IDE. These files are stored beneath the "Library" folder in this directory. 
+
+
+
+The include Arduino files are:
+
+1) Whiteboard Demo - This runs the whiteboard demo with a hard-coded wall.
+2) whiteboard_VR_integration - This file will run the whiteboard demo using the virtual wall from unity. (Note this must be run alongside "readFromUnity")
+3) readFromUnity - This file send the VR data from Unity to the robot's arduino. (Note this code is run on the secondary arduino that is wired to the robot's arduino).
+
+NOTE: This code runs using both the ODrive Arduino Library and the Eigen Library, so ensure those are installed before use as explained above.
