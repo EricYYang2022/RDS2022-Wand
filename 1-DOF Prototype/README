@@ -1,3 +1,4 @@
 This directory contains all of the documentation and files used to test the initial 1DOF motor/code setup for the 2022 RDS Wand Project. 
 
-Note, these documents were used to test with one motor and an Arduino teensy, to find the code for the Beta version of the full robot, please go to the RDS2022-Wand/Code/FinalCode directory.
+Note, these documents were used to test with one motor and an Arduino teensy, to find the code for the Beta version of the full robot, please 
+go to the RDS2022-Wand/Code/FinalCode directory.
