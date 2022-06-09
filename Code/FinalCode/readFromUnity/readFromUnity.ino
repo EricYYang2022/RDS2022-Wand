@@ -1,5 +1,5 @@
 #define HWSERIAL Serial2
-
+// This file is to be run on the secondary Arduino Teensy to facilitate the transfer of the VR data to the robot's arduino. Ensure the two arduinos are wired together before use.
 String incoming_string="";
 String incoming_string1="";
 String incoming_string2="";
